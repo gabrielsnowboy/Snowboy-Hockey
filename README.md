@@ -4,6 +4,12 @@ A retro 5v5 arcade ice hockey game that runs entirely in your browser. No instal
 
 **Play:** `https://YOUR-USERNAME.github.io/snowboy-hockey/` (after you finish the steps below)
 
+## Animation upgrade (November 2026)
+- Dynamic skate weight shifts and stride bobbing, including regular, small and big skaters.
+- Articulated stick-grip hands, puck-handling shoulder shifts and moving blades.
+- Fight footwork, circling, two synchronized strikes per combo, recoil, dodges and an animated glove layer over sprite artwork.
+- All changes run locally in the browser; no installation or external rendering service required.
+
 ## Features
 - 5v5 arcade hockey with Small, Regular and Big player types, fights, hits, spins and slapshots
 - Easy / Normal / Hard difficulty (camera view)
@@ -42,3 +48,24 @@ To update the game later, upload a new `index.html` over the old one (**Add file
 - Your settings (difficulty, volume, teams) are saved in your own browser.
 - Online play uses the free public PeerJS service. If it is ever down, play offline instead.
 - The pixel font loads from Google Fonts. Without internet the game still works with a fallback font.
+
+## Main menu redesign (November 2026)
+
+- Two-column, rink-inspired home screen: prominent match-up and Play Match area with a separate game-modes panel.
+- Resized, responsive controls and mobile-friendly vertically stacked layout, without shrinking the entire menu.
+- Existing buttons, team editor, online mode, cards, period selector, difficulty selector and keyboard shortcut IDs are preserved.
+- Keyboard instructions remain available in a collapsible **How to Play** section.
+- Accessibility updates include visible keyboard focus and reduced-motion support.
+
+The gameplay animation enhancements in the prior upgrade are retained. Browser gameplay validation is recommended after deployment.
+
+## Ice, player proportions and skating upgrade (November 7, 2026)
+
+- Rebalanced skater body dimensions and collision radii for more natural proportions compared with the 1560×800 arena.
+- Updated ice shading with subtly alternating resurfacer lanes, gentle frosty edge illumination, improved skate scratches and fine crystalline highlights.
+- Added real-time skate edge marks underneath moving players.
+- Player steering now blends toward the requested direction with quick acceleration, softer coasting, and a limited turn rate, creating more convincing skating without changing key bindings.
+- Increased lateral stick movement when carrying the puck.
+- Previous main-menu redesign, skating/fight animation upgrade, game modes and controls are preserved.
+
+Validation: JavaScript syntax checked with Node.js. Full interactive gameplay was not validated in a browser in the build environment.
