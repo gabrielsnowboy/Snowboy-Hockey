@@ -366,6 +366,19 @@ input[type=color]{width:30px;height:26px;border:0;background:none;cursor:pointer
 .tournament-match{flex:1;min-width:170px;border:1px solid #446c91;background:#08162a;border-radius:9px;padding:8px;font-size:11px}
 .tournament-match b{color:#7dd3fc}.tournament-match span{display:block;margin-top:4px;color:#d7ebff}
 .tournament-match.current{border-color:#fbbf24;box-shadow:0 0 12px #fbbf2420}
+
+/* Playoff television presentation */
+#netOverOverlay .sheet{border:1px solid #59bce6;box-shadow:0 24px 90px #000b,0 0 32px #38bdf824;background:radial-gradient(ellipse at 50% 0%,#183f63 0%,#0a192e 55%,#061122 100%);max-width:660px}
+#netOverOverlay .playoff-broadcast-mark{display:flex;align-items:center;justify-content:center;gap:14px;color:#7dd3fc;font:900 11px system-ui,sans-serif;letter-spacing:2px;margin:0 auto 18px}
+#netOverOverlay .playoff-broadcast-mark::before,#netOverOverlay .playoff-broadcast-mark::after{content:'';height:2px;background:linear-gradient(90deg,transparent,#38bdf8);flex:1}
+#netOverOverlay .playoff-broadcast-mark::after{transform:rotate(180deg)}
+#netOverOverlay #noTitle{font-family:system-ui,sans-serif;font-weight:950;font-size:clamp(20px,4vw,31px)!important;letter-spacing:1.1px;text-shadow:0 4px 20px #0009;line-height:1.15}
+#netOverOverlay #noScore{font-family:system-ui,sans-serif;font-size:clamp(17px,3vw,25px)!important;font-weight:950;background:#071427ba;border:1px solid #396b94;border-radius:12px;padding:18px 10px;margin:14px 0!important}
+#netOverOverlay #noResult{font-family:system-ui,sans-serif;font-weight:950;font-size:clamp(18px,3vw,26px)!important}
+#netOverOverlay #noSeries{font-family:system-ui,sans-serif;font-size:13px!important;line-height:1.5!important;font-weight:750}
+#netOverOverlay .playoff-series-bar{height:5px;background:linear-gradient(90deg,#ef4444,#fbbf24 48%,#38bdf8);border-radius:10px;margin:14px 0 20px}
+.tournament-bracket{display:flex;flex-wrap:wrap;gap:10px}.tournament-match{flex:1 1 180px;border:1px solid #426c90;background:linear-gradient(#16324e,#0b1d34);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:7px;font:700 12px system-ui,sans-serif;color:#dbeafe}
+.tournament-match.current{border-color:#fbbf24;box-shadow:0 0 18px #fbbf242c}.tournament-match b{color:#fbbf24;letter-spacing:1px;font-size:11px}
 </style>
 </head>
 <body>
@@ -601,6 +614,7 @@ input[type=color]{width:30px;height:26px;border:0;background:none;cursor:pointer
 <!-- ONLINE RESULT / SERIES -->
 <div id="netOverOverlay" class="modal hidden">
   <div class="sheet" style="text-align:center">
+    <div class="playoff-broadcast-mark">SNOWBOY HOCKEY · LIVE PLAYOFF COVERAGE</div><div class="playoff-series-bar"></div>
     <div class="retro" id="noTitle" style="color:var(--gold);font-size:13px;margin-bottom:12px"></div>
     <svg id="noTrophy" class="hidden" width="74" height="74" viewBox="0 0 64 64" style="margin:0 auto 6px;display:block"><path d="M18 8h28v14c0 9-6 15-14 15S18 31 18 22z" fill="#facc15" stroke="#92400e" stroke-width="2"/><path d="M18 12H8c0 9 4 14 11 15M46 12h10c0 9-4 14-11 15" fill="none" stroke="#f59e0b" stroke-width="3"/><rect x="28" y="37" width="8" height="9" fill="#f59e0b"/><rect x="20" y="46" width="24" height="7" rx="2" fill="#92400e"/><path d="M25 14v8" stroke="#fff8" stroke-width="3" stroke-linecap="round"/></svg>
     <div class="retro" id="noScore" style="font-size:15px;color:#fff;margin:6px 0"></div>
@@ -1579,12 +1593,13 @@ class Puck {
 
     if (this.targetReceiver && this.homingTimer > 0 && !this.bank) {         // steer into the receiver with a limited turn rate, softening as it arrives
       const tr = this.targetReceiver, d = Math.hypot(tr.x - this.x, tr.y - this.y);
-      if (d < 120) {
+      if (d < 155) {
         const sp = Math.hypot(this.vx, this.vy) || 1;
-        const want = Math.atan2(tr.y + tr.vy * 3 - this.y, tr.x + tr.vx * 3 - this.x), cur = Math.atan2(this.vy, this.vx);
+        const want = Math.atan2(tr.y + tr.vy * 4 - this.y, tr.x + tr.vx * 4 - this.x), cur = Math.atan2(this.vy, this.vx);
         let da = want - cur; while (da > Math.PI) da -= Math.PI * 2; while (da < -Math.PI) da += Math.PI * 2;
-        const na = cur + clamp(da, -0.11, 0.11), nsp = d < 70 ? Math.max(sp * 0.88, 4) : sp;
-        this.vx = Math.cos(na) * nsp; this.vy = Math.sin(na) * nsp;
+        const na = cur + clamp(da, -0.14, 0.14), nsp = d < 58 ? Math.max(sp * 0.82, 3.2) : d < 95 ? Math.max(sp * 0.92, 4.2) : sp;
+        this.vx = Math.cos(na) * nsp + tr.vx * (d < 80 ? 0.08 : 0.03);
+        this.vy = Math.sin(na) * nsp + tr.vy * (d < 80 ? 0.08 : 0.03);
       }
     }
     if (Math.abs(this.spinFactor) > 0.01) {
@@ -2148,8 +2163,9 @@ class Skater {
     // intended receiver reads the pass and goes to meet the puck
     if (puck.targetReceiver === this && !puck.holder && puck.homingTimer > 0) {
       const bs = puck.bank && puck.bankSpot;                                  // bank pass: wait for the rebound, don't chase the puck into the boards
-      const ia = bs ? Math.atan2(bs.y - this.y, bs.x - this.x) : Math.atan2(puck.y + puck.vy * 5 - this.y, puck.x + puck.vx * 5 - this.x);
-      this.vx = Math.cos(ia) * this.baseSpeed; this.vy = Math.sin(ia) * this.baseSpeed; this.angle = ia; this.animFrame += 0.2;
+      const ia = bs ? Math.atan2(bs.y - this.y, bs.x - this.x) : Math.atan2(puck.y + puck.vy * 6 - this.y, puck.x + puck.vx * 6 - this.x);
+      const chase = bs ? this.baseSpeed * 0.96 : this.baseSpeed * 1.08;
+      this.vx = Math.cos(ia) * chase; this.vy = Math.sin(ia) * chase; this.angle = ia; this.animFrame += 0.22;
       return;
     }
     const spd = this.baseSpeed * 0.8 * (this.fightBoost > 0 ? 1.06 : 1) * (hasMom(this) ? 1 + 0.04 * momX(this) : 1);
@@ -2271,7 +2287,20 @@ class Skater {
       if (dC < this.radius + carrier.radius + 24 + (this.reach || 0) * 1.2 && this.checkCD === 0 && this.stunned === 0 && Math.random() < 0.035) performCheck(this, carrier, true);
     }
 
+    // traffic-aware spacing: spread skaters out so attacks and puck battles look less like a pile-up
+    let avoidX = 0, avoidY = 0;
+    players.forEach(o => {
+      if (o === this || o.isGoalie) return;
+      const dx = this.x - o.x, dy = this.y - o.y, d = Math.hypot(dx, dy) || 1;
+      const same = o.team === this.team, want = same ? 62 : 48;
+      if (d < want) {
+        const push = (want - d) / want * (same ? 34 : 18);
+        avoidX += dx / d * push; avoidY += dy / d * push;
+      }
+    });
+    tx += avoidX; ty += avoidY;
     tx = this.onsideX(tx);
+    tx = clamp(tx, RINK.L + 34, RINK.R - 34); ty = clamp(ty, RINK.T + 34, RINK.B - 34);
     const a = Math.atan2(ty - this.y, tx - this.x);
     const slow = Math.hypot(tx - this.x, ty - this.y) < 4 ? 0 : 1;
     this.vx = Math.cos(a) * spd * slow; this.vy = Math.sin(a) * spd * slow;
@@ -2562,9 +2591,12 @@ class Skater {
       const cycle = ((F && F.bt || 0) + (ix > 0 ? 13 : 0)) * Math.PI / 18;
       const footwork = F && F.phase === 'brawl' ? 1 : 0.35;
       const balance = this.shake > 0 ? this.shake / 8 : 0;
-      ctx.translate(Math.sin(cycle) * 2.5 * footwork - balance * 2.7, this.height / 2);
-      ctx.rotate(Math.sin(cycle * 0.5) * 0.095 * footwork - balance * 0.15);
-      ctx.scale(1.45 + footwork * Math.sin(cycle) * 0.028, 1.45 - footwork * Math.abs(Math.sin(cycle)) * 0.045);
+      const dodge = F && ix >= 0 && F.dodge ? (F.dodge[ix] || 0) : 0;
+      const react = F && ix >= 0 && F.hitReact ? (F.hitReact[ix] || 0) : 0;
+      const step = Math.sin((F && F.bt || 0) * .23 + ix * 2.1);
+      ctx.translate(Math.sin(cycle) * 2.5 * footwork - balance * 2.7 + (ix ? -1 : 1) * dodge * 3.8, this.height / 2);
+      ctx.rotate(Math.sin(cycle * 0.5) * 0.095 * footwork - balance * 0.15 + (ix ? -.1 : .1) * (dodge + react));
+      ctx.scale(1.45 + footwork * Math.sin(cycle) * 0.028 + Math.abs(step) * .022, 1.45 - footwork * Math.abs(Math.sin(cycle)) * 0.045 - (dodge + react) * .055);
       ctx.translate(0, -this.height / 2);
     }
     const fxm = this.fighting ? finXform(this) : null;
@@ -3981,7 +4013,7 @@ function startFight(v, a) {
   const f = [v, a];
   f.forEach(q => { q.stunned = 0; q.spinning = false; q.blocking = false; q.fighting = true; q.fallen = 0; q.punch = 0; q.vx = 0; q.vy = 0; q.celeb = null; q.hitHeat = 0; q.isActive = false; });
   const spot = { x: clamp((v.x + a.x) / 2, RINK.L + 130, RINK.R - 130), y: clamp((v.y + a.y) / 2, RINK.T + 80, RINK.B - 80) };
-  gs.fight = { t: 0, phase: 'approach', f, spot, hp: [100, 100], drops: [], winner: null, endT: 0 };
+  gs.fight = { t: 0, phase: 'approach', f, spot, hp: [100, 100], drops: [], winner: null, endT: 0, dodge: [0,0], hitReact: [0,0], footPhase: Math.random() * 6.28 };
   mouse.leftDown = false; mouse.chargeTime = 0; $('oneTimerBanner').classList.add('hidden'); gs.oneTimerTarget = null; gs.oneTimerTimer = 0;
   const nm = q => `${gs[q.team === 'home' ? 'homeTeam' : 'awayTeam'].city.toUpperCase()} #${JERSEY_NUM[q.position] ?? ''}`;
   showStatus((v.isGoalie ? 'GOALIE FIGHT! ' : 'FIGHT! ') + nm(v) + (v.isGoalie ? ' (G)' : '') + ' VS ' + nm(a)); commentate('fight');
@@ -4065,7 +4097,7 @@ function stepFight() {
       q.x += (tx - q.x) * 0.12; q.y += (ty - q.y) * 0.12; q.angle = i === 0 ? 0 : Math.PI; q.animFrame += 0.25;
     });
     if (F.t >= 45) {
-      F.phase = 'brawl'; F.bt = 0; F.prop = null; F.lastProp = -1;
+      F.phase = 'brawl'; F.bt = 0; F.prop = null; F.lastProp = -1; F.dodge = [0,0]; F.hitReact = [0,0];
       [a, b].forEach((q, i) => { q.x = sp.x + (i === 0 ? -19 : 19); q.y = sp.y; F.drops.push({ x: q.x + (i ? 34 : -34), y: q.y + 12 + i * 6, kind: 'stick', ang: i ? 0.5 : -0.4 }); });   // only the sticks hit the ice: the helmets and gloves stay on in the artwork
       showStatus('GLOVES OFF! IT\'S ON!'); audioFX.playCrowdRoar(2.6); crowd.burst(1);
     }
@@ -4081,16 +4113,26 @@ function stepFight() {
     }
     // Sparring footwork: advance, pivot, recoil and circle the center while keeping the
     // combatants in contact range. The fight no longer occurs at two frozen coordinates.
-    const orbit = Math.sin(F.bt * 0.027) * 0.24;
-    const gap = 22 + 3.5 * Math.sin(F.bt * 0.095);
+    const orbit = Math.sin(F.bt * 0.026 + F.footPhase) * 0.27;
+    const gap = 23 + 3.8 * Math.sin(F.bt * 0.088);
     [a, b].forEach((q, i) => {
-      const sg = i ? 1 : -1, hop = Math.sin(F.bt * 0.28 + i * 2.1);
-      const tx = sp.x + sg * gap * Math.cos(orbit) - Math.sin(orbit) * sg * 6;
-      const ty = sp.y + sg * gap * Math.sin(orbit) + hop * 3.1;
-      q.x += (tx - q.x) * 0.19; q.y += (ty - q.y) * 0.22;
-      q.vx = tx - q.x; q.vy = ty - q.y;
-      q.angle = i ? Math.PI + orbit : orbit;
-      q.animFrame += 0.17 + Math.abs(hop) * 0.09;
+      const sg = i ? 1 : -1, rhythm = F.bt * .23 + i * 2.2;
+      const hop = Math.sin(rhythm), counter = (F.bt + (1 - i) * 13) % 36;
+      const incoming = Math.max(0, 1 - Math.abs(counter - 11) / 7, 1 - Math.abs(counter - 26) / 8);
+      // Weight transfers and guarded pivots are continuous, even between punch frames.
+      const dodge = (F.dodge[i] || 0), recoil = (F.hitReact[i] || 0);
+      const retreat = incoming * (2.8 + dodge * 7) + recoil * 6;
+      const advance = Math.max(0, Math.sin(rhythm * .65)) * 3.1;
+      const sideways = Math.sin(F.bt * .071 + i * 2.1) * 4 + dodge * (i ? -5 : 5);
+      const tx = sp.x + sg * (gap + retreat - advance) * Math.cos(orbit) - sideways * Math.sin(orbit);
+      const ty = sp.y + sg * (gap + retreat - advance) * Math.sin(orbit) + sideways * Math.cos(orbit) + hop * 2.2;
+      const prevX = q.x, prevY = q.y;
+      q.x += (tx - q.x) * .22; q.y += (ty - q.y) * .24;
+      q.vx = q.x - prevX; q.vy = q.y - prevY;
+      const opponent = F.f[1-i];
+      q.angle = Math.atan2(opponent.y - q.y, opponent.x - q.x);
+      q.animFrame += .19 + Math.abs(hop) * .11 + Math.hypot(q.vx, q.vy) * .025;
+      F.dodge[i] *= .86; F.hitReact[i] *= .80;
     });
     [0, 1].forEach(i => {
       const c = (F.bt + i * 13) % 36;
@@ -4100,11 +4142,12 @@ function stepFight() {
       const c = (F.bt + i * 13) % 36; if (c !== 11 && c !== 26) return;
       const att = F.f[i], vic = F.f[1 - i], wi = Math.sqrt(att.strength + att.mass * 0.6), wo = Math.sqrt(vic.strength + vic.mass * 0.6);
       if (Math.random() > Math.min(0.95, wi / (wi + wo) * 1.1)) {
+        F.dodge[1-i] = 1;
         vic.x += (i ? 1 : -1) * 2.5; vic.y += (i ? -1 : 1) * 2;
         try { audioFX.playWhoosh && audioFX.playWhoosh(); } catch (e) { } return;
       }   // a miss: the fist whiffs past
       F.hp[1 - i] -= (5 + att.strength * 1.7 + Math.random() * 5) * 0.62;
-      att.punch = Math.max(att.punch, 8); vic.shake = 8; vic.x += (i ? -1 : 1) * 3.0; vic.y += (i ? 1 : -1) * 1.2;
+      att.punch = Math.max(att.punch, 8); vic.shake = 8; F.hitReact[1-i] = 1; vic.x += (i ? -1 : 1) * 3.0; vic.y += (i ? 1 : -1) * 1.2;
       addFx('burst', (a.x + b.x) / 2, sp.y - 14);
       F.shakeT = 7;
       F.wi = ((F.wi || 0) + 1 + (Math.random() * 3 | 0)) % BAT_WORDS.length; addFx('comic', (a.x + b.x) / 2 + (F.bt % 2 ? 74 : -74), sp.y - 52 - (Math.random() * 12 | 0), '*' + BAT_WORDS[F.wi]);   // BIFF! POW! beside the fighters, never over their faces
@@ -5007,9 +5050,26 @@ function toggleCpuStrategy() {
 function switchActivePlayer(team = ME()) {
   const cur = getActivePlayer(team), sk = players.filter(p => p.team === team && !p.isGoalie);
   if (!sk.length) return;
-  let closest = null, md = Infinity;
-  sk.forEach(p => { if (p !== cur) { const d = Math.hypot(p.x - puck.x, p.y - puck.y); if (d < md) { md = d; closest = p; } } });
-  setActive(closest || sk[0]);
+  if (!puck.holder && puck.targetReceiver && puck.targetReceiver.team === team && puck.homingTimer > 0) { setActive(puck.targetReceiver); return; }
+  const own = puck.holder && puck.holder.team === team, dir = team === 'home' ? 1 : -1, myGoal = defGoalX(team);
+  let best = null, bestScore = -Infinity;
+  sk.forEach(p => {
+    if (p === cur && sk.length > 1) return;
+    const dp = Math.hypot(p.x - puck.x, p.y - puck.y);
+    let score = -dp;
+    if (own) {
+      score += (p.x - RINK.CX) * dir * 0.18;
+      if (p.position === 'C') score += 12;
+      if (puck.holder && p !== puck.holder) score += Math.min(40, Math.hypot(p.x - puck.holder.x, p.y - puck.holder.y) * -0.06 + 24);
+    } else {
+      const goalSide = dir > 0 ? (p.x <= puck.x ? 1 : 0) : (p.x >= puck.x ? 1 : 0);
+      score += goalSide ? 24 : 0;
+      if (puck.holder && puck.holder.team !== team) score += Math.max(0, 180 - Math.hypot(p.x - puck.holder.x, p.y - puck.holder.y)) * 0.08;
+      score += Math.max(0, 230 - Math.hypot(p.x - myGoal, p.y - RINK.CY)) * 0.02;
+    }
+    if (score > bestScore) { bestScore = score; best = p; }
+  });
+  setActive(best || sk[0]);
 }
 
 /* =====================================================================
@@ -5116,12 +5176,12 @@ function step() {
           const t = sl > 0 ? clamp(((p.x - puck.px) * sx + (p.y - puck.py) * sy) / sl, 0, 1) : 1;
           dd = Math.min(dd, Math.hypot(p.x - (puck.px + sx * t), p.y - (puck.py + sy * t)));
         }
-        const reachR = p.radius + puck.radius + 1 + (p.reach || 0) * 0.6 + (isRecv ? 8 : 0);
+        const reachR = p.radius + puck.radius + 1 + (p.reach || 0) * 0.6 + (isRecv ? 12 : 0);
         if (dd < reachR) {
           const relV = Math.hypot(puck.vx - p.vx, puck.vy - p.vy), pspd = Math.hypot(p.vx, p.vy);
           let fa = Math.atan2(puck.y - p.y, puck.x - p.x) - p.angle; while (fa > Math.PI) fa -= Math.PI * 2; while (fa < -Math.PI) fa += Math.PI * 2;
-          const inFront = Math.abs(fa) < 1.9 || dd < p.radius * 0.7 || pspd < 1.2;             // the stick is out front: a puck behind him has to be dragged round, not sucked in
-          if (!inFront || relV > (isRecv ? 26 : 13)) {                                                     // too fast or behind: no catch, it just gets knocked about
+          const inFront = Math.abs(fa) < (isRecv ? 2.35 : 1.9) || dd < p.radius * 0.76 || pspd < 1.35;             // intended receiver gets more cushion so clean passes feel better
+          if (!inFront || relV > (isRecv ? 30 : 13)) {                                                     // too fast or behind: no catch, it just gets knocked about
             if (!isRecv && dd < p.radius + puck.radius + 2 && !puck.passImmunityTimer) { const nx = (puck.x - p.x) / (dd || 1), ny = (puck.y - p.y) / (dd || 1); puck.vx += nx * 0.8 + p.vx * 0.18; puck.vy += ny * 0.8 + p.vy * 0.18; puck.passImmunityTimer = 3; }
             continue;
           }
@@ -5144,9 +5204,29 @@ function step() {
         showStatus('TURNOVER! GOALIE CREASE PUSH!');
       }
     }
-    // dead puck watchdog: loose and motionless for ~6s -> faceoff
+    // dead puck watchdog: try to free board scrums before finally blowing it dead
     if (!puck.holder && !gs.inFaceoff && Math.hypot(puck.vx, puck.vy) < 0.25) {
-      if (++gs.stuckTimer > 360) { showStatus('PUCK FROZEN! FACEOFF'); audioFX.playWhistle(); startFaceoffNear(puck.x, puck.y); }
+      if (++gs.stuckTimer > 110 && gs.stuckTimer % 45 === 0) {
+        let nx = 0, ny = 0;
+        const ds = [
+          { d: puck.x - RINK.L, nx: 1, ny: 0 },
+          { d: RINK.R - puck.x, nx: -1, ny: 0 },
+          { d: puck.y - RINK.T, nx: 0, ny: 1 },
+          { d: RINK.B - puck.y, nx: 0, ny: -1 }
+        ].sort((a, b) => a.d - b.d);
+        if (ds[0].d < 42) { nx += ds[0].nx * 0.9; ny += ds[0].ny * 0.9; }
+        const nearest = players.filter(p => !p.isGoalie).reduce((a, b) => !a || Math.hypot(b.x - puck.x, b.y - puck.y) < Math.hypot(a.x - puck.x, a.y - puck.y) ? b : a, null);
+        if (nearest) {
+          const ang = Math.atan2(nearest.y - puck.y, nearest.x - puck.x);
+          nx += Math.cos(ang) * 0.35; ny += Math.sin(ang) * 0.35;
+        }
+        const ll = Math.hypot(nx, ny) || 1;
+        puck.vx = nx / ll * 1.8 + (Math.random() - 0.5) * 0.35;
+        puck.vy = ny / ll * 1.8 + (Math.random() - 0.5) * 0.35;
+        puck.passImmunityTimer = 4;
+        if (gs.stuckTimer === 155) showStatus('BOARD BATTLE! PUCK IS LOOSE!');
+      }
+      if (gs.stuckTimer > 300) { showStatus('PUCK FROZEN! FACEOFF'); audioFX.playWhistle(); startFaceoffNear(puck.x, puck.y); }
     } else gs.stuckTimer = 0;
   }
 
@@ -5210,6 +5290,26 @@ function handleError(err) {
    RENDER
    ===================================================================== */
 function fightCam() { const F = gameState.fight; return F ? (F.cam || 0) : 0; }
+
+/* Broadcast scorebug: readable on top of any rink and shared by every peer. */
+function drawPlayoffBroadcast() {
+  const gs = gameState;
+  if (!gs.running || gs.fight || gs.handshake || gs.zam || gs.so || !net.active || (net.mode !== 'playoff' && net.mode !== 'tournament')) return;
+  const g = ctx, isTour = net.mode === 'tournament';
+  const round = isTour ? ((net.tour && net.tour.matches && net.tour.matches[net.tour.current] ? net.tour.matches[net.tour.current].round : net.currentRound) === 1 ? 'CHAMPIONSHIP FINAL' : 'SEMIFINAL') : `BEST OF ${net.series ? net.series.best : 3} • GAME ${net.series ? net.series.game : 1}`;
+  const title = isTour ? 'SNOWBOY PLAYOFF TOURNAMENT' : 'SNOWBOY PLAYOFF SERIES';
+  const mx = W / 2, y = 32, width = 520;
+  g.save(); g.globalAlpha = .93;
+  const panel = g.createLinearGradient(mx-width/2,y,mx+width/2,y); panel.addColorStop(0,'#092644');panel.addColorStop(.5,'#071222');panel.addColorStop(1,'#092644');
+  g.fillStyle=panel;g.strokeStyle='#58b6e0';g.lineWidth=1.4;
+  g.beginPath();g.roundRect(mx-width/2,y,width,54,9);g.fill();g.stroke();
+  g.fillStyle='#fbbf24';g.fillRect(mx-width/2+9,y+7,3,40);g.fillRect(mx+width/2-12,y+7,3,40);
+  g.globalAlpha=1;g.textAlign='center';g.textBaseline='middle';
+  g.font='800 10px system-ui,sans-serif';g.fillStyle='#7dd3fc';g.fillText(title,mx,y+13);
+  g.font='800 15px system-ui,sans-serif';g.fillStyle='#fff';g.fillText(round,mx,y+34,470);
+  if (isTour && net.role==='guest' && !net.playSide) {g.fillStyle='#fbbf24';g.font='700 10px system-ui,sans-serif';g.fillText('LIVE SPECTATOR',mx,y+49);}
+  g.restore();
+}
 function render() {
   ctx.clearRect(0, 0, W, H);
   const k = fightCam(), F = gameState.fight;
@@ -5243,6 +5343,7 @@ function render() {
     ctx.font = 'bold 14px monospace'; ctx.textAlign = 'center'; ctx.fillStyle = `rgba(186,230,253,${sEnv})`; ctx.fillText('B U L L E T   T I M E', W / 2, 52);
   }
   if (k > 0 && F.phase === 'finisher' && F.fk >= 0) { try { drawFinTitle(F); } catch (e) { } }
+  if (!k) drawPlayoffBroadcast();
   if (k > 0) {                                                    // vignette + cinematic bars
     const g = ctx.createRadialGradient(W / 2, H / 2, 150, W / 2, H / 2, 560);
     g.addColorStop(0, 'rgba(2,6,23,0)'); g.addColorStop(1, `rgba(2,6,23,${0.7 * k})`);
@@ -5774,7 +5875,7 @@ function buildSnapshot() {
     hs: gs.homeScore, as: gs.awayScore, hsh: gs.homeShots, ash: gs.awayShots, per: gs.period, tr: gs.timeRemaining,
     intro: gs.inIntro ? 1 : 0, fo: gs.inFaceoff ? 1 : 0, fos: gs.faceoffState, ft: gs.faceoffTimer | 0, fxy: [gs.faceX ?? -1, gs.faceY ?? -1], gl: gs.goalScored ? 1 : 0, gf: gs.goalFlash,
     mom: gs.mom, hk: gs.handshake ? 1 : 0, sg: gs.singer ? gs.singer.t : -1, sgd: gs.singer ? (gs.singer.dur || 0) : 0, so: gs.so ? { m: gs.so.marks, g: gs.so.goals, tu: gs.so.turn, sd: gs.so.sd } : null,
-    fight: gs.fight ? { sl: gs.fight.slow || 0, sd: gs.fight.slowDur || 0, phase: gs.fight.phase, t: gs.fight.t, cam: gs.fight.cam || 0, spot: gs.fight.spot, drops: gs.fight.drops, bt: gs.fight.bt || 0, prop: gs.fight.prop || null, hp: gs.fight.hp, fp: gs.fight.f.map(q => players.indexOf(q)), fk: gs.fight.fk == null ? -1 : gs.fight.fk, ft: gs.fight.finT || 0, fw: gs.fight.fw == null ? -1 : gs.fight.fw } : null
+    fight: gs.fight ? { sl: gs.fight.slow || 0, sd: gs.fight.slowDur || 0, phase: gs.fight.phase, t: gs.fight.t, cam: gs.fight.cam || 0, spot: gs.fight.spot, drops: gs.fight.drops, bt: gs.fight.bt || 0, prop: gs.fight.prop || null, dodge: gs.fight.dodge || [0,0], hitReact: gs.fight.hitReact || [0,0], hp: gs.fight.hp, fp: gs.fight.f.map(q => players.indexOf(q)), fk: gs.fight.fk == null ? -1 : gs.fight.fk, ft: gs.fight.finT || 0, fw: gs.fight.fw == null ? -1 : gs.fight.fw } : null
   };
   const fb = $('faceoffBanner'), am = inp.away.mouse, ap = getActivePlayer('away');
   const u = { fb: fb.classList.contains('hidden') ? null : fb.textContent, ct: am.chargeTime, ld: am.leftDown ? 1 : 0, sb: ap ? Math.min(100, ap.spinHeat / 1.6 * 100) : 0, ot: gs.otTeam === 'away' ? 1 : 0 };
@@ -5875,7 +5976,7 @@ function startGuestMatch(m) {
   gameState = Object.assign(freshGameState(), { homeTeam: m.home, awayTeam: m.away, periodLength: m.len, timeRemaining: m.len });
   gameState.running = true; gameState.inIntro = !!m.intro;
   net.series = m.series; net.mode = m.mode; net.snapFirst = true;
-  if (m.mode === 'tournament') { net.playSide = m.side || null; inp.home = freshAwayInput(); inp.away = freshAwayInput(); if (net.playSide) inp[net.playSide] = { keys, mouse }; }
+  if (m.mode === 'tournament') { net.currentRound = m.round; net.currentMatch = m.match; net.playSide = m.side || null; inp.home = freshAwayInput(); inp.away = freshAwayInput(); if (net.playSide) inp[net.playSide] = { keys, mouse }; }
   Object.keys(keys).forEach(k => keys[k] = false); mouse.leftDown = false; mouse.chargeTime = 0;
   crowd.confetti.length = 0; crowd.energy = 0; effects.length = 0;
   ['pauseOverlay', 'faceoffBanner', 'oneTimerBanner', 'netOverOverlay', 'onlineOverlay', 'menuOverlay', 'menuResult'].forEach(i => $(i).classList.add('hidden'));
@@ -6323,14 +6424,21 @@ function drawCard(cv, a, o = {}) {
   const vg = g.createLinearGradient(0, 0, 0, 170); vg.addColorStop(0, '#000b'); vg.addColorStop(1, '#0000'); g.fillStyle = vg; g.fillRect(0, 0, W, 170);
   // ---------- sticker emoji ----------
   g.save(); g.translate(W - 82, 330); g.rotate(-0.18); g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '104px system-ui,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; g.shadowColor = '#000b'; g.shadowBlur = 16; g.fillText(a.emoji, 0, 0); g.restore();
-  // ---------- brand badge (top-left, like a league crest) ----------
-  g.save(); g.translate(30, 26);
-  g.beginPath(); g.moveTo(0, 0); g.lineTo(158, 0); g.lineTo(158, 62); g.quadraticCurveTo(158, 92, 79, 108); g.quadraticCurveTo(0, 92, 0, 62); g.closePath();
-  const bg2 = g.createLinearGradient(0, 0, 0, 108); bg2.addColorStop(0, '#2563eb'); bg2.addColorStop(1, '#0b1f5c'); g.fillStyle = bg2; g.fill(); g.lineWidth = 5; g.strokeStyle = '#f59e0b'; g.stroke();
-  g.lineWidth = 2; g.strokeStyle = '#fde68a'; g.beginPath(); g.moveTo(8, 8); g.lineTo(150, 8); g.lineTo(150, 62); g.quadraticCurveTo(150, 86, 79, 100); g.quadraticCurveTo(8, 86, 8, 62); g.closePath(); g.stroke();
-  g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `19px ${HEAD}`; g.lineWidth = 5; g.strokeStyle = '#0f172a'; g.lineJoin = 'round';
-  g.strokeText('SNOW', 79, 28); g.fillStyle = '#fff'; g.fillText('SNOW', 79, 28); g.strokeText('BOY', 79, 54); g.fillText('BOY', 79, 54);
-  g.font = `10px ${HEAD}`; g.lineWidth = 4; g.strokeText('HOCKEY', 79, 78); g.fillStyle = '#fbbf24'; g.fillText('HOCKEY', 79, 78); g.restore();
+  // ---------- brand badge (top-left, inspired by a modern collector crest) ----------
+  g.save(); g.translate(28, 22);
+  g.beginPath(); g.moveTo(10, 0); g.lineTo(152, 0); g.quadraticCurveTo(166, 0, 166, 14); g.lineTo(166, 70); g.quadraticCurveTo(166, 96, 83, 116); g.quadraticCurveTo(0, 96, 0, 70); g.lineTo(0, 14); g.quadraticCurveTo(0, 0, 10, 0); g.closePath();
+  const bg2 = g.createLinearGradient(0, 0, 0, 116); bg2.addColorStop(0, '#1d4ed8'); bg2.addColorStop(0.48, '#17356f'); bg2.addColorStop(1, '#08152f'); g.fillStyle = bg2; g.fill(); g.lineWidth = 5; g.strokeStyle = '#f59e0b'; g.stroke();
+  g.save(); g.beginPath(); g.moveTo(14, 10); g.lineTo(152, 10); g.quadraticCurveTo(156, 10, 156, 16); g.lineTo(156, 67); g.quadraticCurveTo(156, 87, 83, 103); g.quadraticCurveTo(10, 87, 10, 67); g.lineTo(10, 16); g.quadraticCurveTo(10, 10, 14, 10); g.closePath(); g.clip();
+  g.fillStyle = '#17315f'; g.fillRect(10, 10, 146, 94); g.globalAlpha = 0.18; g.fillStyle = '#60a5fa';
+  for (let y = 18; y < 94; y += 14) for (let x = 18; x < 152; x += 16) { g.beginPath(); g.arc(x + (y % 28 ? 6 : 0), y, 3.3, 0, 7); g.fill(); }
+  g.globalAlpha = 0.2; g.strokeStyle = '#93c5fd'; g.lineWidth = 1; for (let x = 20; x < 152; x += 20) { g.beginPath(); g.moveTo(x, 10); g.lineTo(x, 95); g.stroke(); }
+  g.restore();
+  rr(g, 22, 13, 122, 54, 8); g.fillStyle = '#1d4ed8'; g.fill(); g.lineWidth = 2; g.strokeStyle = '#fde68a'; g.stroke();
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+  g.font = `18px ${HEAD}`; g.lineWidth = 5; g.strokeStyle = '#0f172a'; g.strokeText('SNOW', 83, 29); g.fillStyle = '#fff'; g.fillText('SNOW', 83, 29); g.strokeText('BOY', 83, 50); g.fillText('BOY', 83, 50);
+  g.beginPath(); g.moveTo(28, 64); g.lineTo(138, 64); g.lineTo(126, 82); g.quadraticCurveTo(83, 96, 40, 82); g.closePath(); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 2; g.strokeStyle = '#0f172a'; g.stroke();
+  g.fillStyle = '#0f172a'; g.font = `10px ${HEAD}`; g.fillText('COLLECTOR', 83, 75);
+  g.restore();
   // number + rarity chips (top-right)
   g.textAlign = 'center'; g.textBaseline = 'middle';
   rr(g, W - 150, 30, 120, 34, 10); g.fillStyle = '#0b1224dd'; g.fill(); g.font = `14px ${HEAD}`; g.fillStyle = '#fde047'; g.fillText(String(idx).padStart(2, '0') + '/' + TOT, W - 90, 48);
@@ -6380,7 +6488,7 @@ function drawCard(cv, a, o = {}) {
   g.beginPath(); g.arc(BX, BY, BR - 25, 0, 7); const bd = g.createLinearGradient(BX, BY - 40, BX, BY + 40); bd.addColorStop(0, '#fff'); bd.addColorStop(1, `hsl(${hue},70%,70%)`); g.fillStyle = bd; g.fill(); g.lineWidth = 3; g.strokeStyle = '#facc15'; g.stroke();
   g.save(); g.beginPath(); g.arc(BX, BY, BR - 26, 0, 7); g.clip(); snowEmblem(g, BX, BY - 3, 1.05, `hsl(${(hue + 180) % 360},75%,48%)`); g.restore();
   const arc = (txt, rad, a0, a1) => { g.save(); g.translate(BX, BY); g.font = `9px ${HEAD}`; g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle'; const n = txt.length; for (let i = 0; i < n; i++) { const an = a0 + (a1 - a0) * (n === 1 ? 0.5 : i / (n - 1)); g.save(); g.rotate(an + Math.PI / 2); g.fillText(txt[i], 0, -rad); g.restore(); } g.restore(); };
-  arc('SNOWBOY HOCKEY', BR - 13, Math.PI * 1.12, Math.PI * 1.88);
+  arc('SNOWBOY COLLECTOR', BR - 13, Math.PI * 1.12, Math.PI * 1.88);
   arc('CARD ' + String(idx).padStart(2, '0'), BR - 13, Math.PI * 0.18, Math.PI * 0.82 > 0 ? Math.PI * 0.82 : 0);
   g.fillStyle = '#facc15'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '11px system-ui,sans-serif'; g.fillText('★', BX - BR + 11, BY); g.fillText('★', BX + BR - 11, BY);
   // ---------- stat strip under the band text ----------
@@ -6406,7 +6514,7 @@ function drawCard(cv, a, o = {}) {
   for (let i = -H; i < W; i += 18) { g.beginPath(); g.moveTo(i, 18); g.lineTo(i + 180, H - 18); g.stroke(); }
   g.restore();
   rr(g, 22, 108, 14, 612, 7); const sideBar = g.createLinearGradient(22, 108, 36, 720); sideBar.addColorStop(0, '#e2e8f0'); sideBar.addColorStop(0.5, R.frame[R.frame.length>>1] || '#93c5fd'); sideBar.addColorStop(1, '#0f172a'); g.fillStyle = sideBar; g.fill();
-  g.fillStyle = '#0f172a'; g.save(); g.translate(29, 415); g.rotate(-Math.PI / 2); g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `10px ${HEAD}`; g.fillText('SNOWBOY PREMIER SERIES', 0, 0); g.restore();
+  g.fillStyle = '#0f172a'; g.save(); g.translate(29, 415); g.rotate(-Math.PI / 2); g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `10px ${HEAD}`; g.fillText('SNOWBOY COLLECTOR SERIES', 0, 0); g.restore();
   rr(g, W - 212, 108, 184, 28, 10); g.fillStyle = '#0b1224d8'; g.fill(); g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = `11px ${HEAD}`; g.fillStyle = '#e2e8f0';
   const serial = String(idx).padStart(2, '0') + ' / ' + String(TOT).padStart(2, '0') + '  •  FIRST EDITION';
   g.fillText(serial, W - 120, 122);

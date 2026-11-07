@@ -102,3 +102,10 @@ Validation: JavaScript syntax checked with Node.js. Full interactive gameplay wa
 - **Randomized fight variety:** Brawls can feature a soft foam folding chair, oversized inflatable bat, ribbon streamer, pool noodle, or squeaky toy mallet. These are short slapstick animations, with comic sound captions. They are visual-only and do not change health, damage, collision or scoring.
 - **Multiplayer sync:** Active fight props and their animation timing are carried in the host's match snapshots for visiting players and spectators.
 - **Previous features kept:** Main menu, professional logo, cards, goalie outlet passing, pause jumbotron, and playoff tournament lobby.
+
+## Fight animation and playoff broadcast update (November 2026)
+- Fighters now use reactive footwork, guarded pivots, timed dodges, clearer recoil and stance changes between frames. Host fight reactions are mirrored in online match snapshots.
+- Online Playoff Series and Playoff Tournament show a TV-style round/game identifier in the rink view.
+- Playoff end-of-game presentation has a stronger score plate, header and series styling; tournament bracket entries are displayed as connected-style match cards in the lobby.
+- Install: upload the ZIP contents (index.html and the logo assets) to the GitHub Pages repository root, not the ZIP itself.
+- Verification: inline JavaScript passes syntax checks. A live Chromium page run was blocked in the test environment, so please verify fights and multiplayer visuals in your browser.
