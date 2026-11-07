@@ -324,6 +324,48 @@ input[type=color]{width:30px;height:26px;border:0;background:none;cursor:pointer
 #menuOverlay .menu-tagline{color:#d8ebf9;letter-spacing:.35px}
 @media(max-width:820px){#menuOverlay .brand-art{width:min(490px,112%);margin:-12px auto -18px}}
 @media(max-width:460px){#menuOverlay .brand-art{width:110%;margin:-12px -5% -15px}}
+
+/* Snowboy Hockey: broadcast-grade pause / arena cam refresh */
+#pauseOverlay{padding:16px 18px 24px;overflow-y:auto;justify-content:flex-start;background:radial-gradient(ellipse at 50% 12%,#183a5bfa 0%,#07182df7 55%,#020712fa 100%);scrollbar-color:#467b9c #07172a}
+#pauseOverlay::before,#pauseOverlay::after{display:none}
+#pauseTop{position:relative;top:auto;margin:auto auto 0;width:min(940px,100%);background:transparent;padding:12px 18px 20px;display:flex;gap:10px;align-items:stretch;flex-direction:column;border:1px solid #75b3d260;border-radius:20px;box-shadow:0 18px 60px #0008,inset 0 1px #ffffff20;background:linear-gradient(160deg,#15314eec,#09172ceb)}
+.pause-head{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:0 8px}
+.pause-eyebrow{color:#7dd3fc;font:800 10px system-ui,sans-serif;letter-spacing:2px}
+.pause-head h2{font:950 clamp(22px,3vw,38px)/1.05 system-ui,sans-serif;letter-spacing:1.2px;color:#fff;margin:7px 0 4px;text-shadow:0 3px 18px #0008}
+.pause-head p{color:#a9c6dd;font:500 12px system-ui,sans-serif;margin:0}
+.pause-status{color:#6ee7b7;background:#062c2b;border:1px solid #3ebf9588;border-radius:20px;padding:9px 12px;font:800 10px system-ui,sans-serif;white-space:nowrap}
+.pause-score{display:grid;grid-template-columns:1fr auto 120px auto 1fr;align-items:center;gap:12px;background:linear-gradient(90deg,#153858,#09172d 50%,#153858);border:1px solid #478ab085;border-radius:12px;padding:10px 18px;color:#fff;min-width:0}
+.pause-score>div:first-child,.pause-away{min-width:0;display:flex;flex-direction:column;gap:3px}
+.pause-away{text-align:right}.pause-score small{font:800 9px system-ui,sans-serif;letter-spacing:1.8px;color:#7dd3fc}
+.pause-score strong{font:850 clamp(11px,1.5vw,15px) system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pause-score>b{font:900 clamp(25px,3vw,37px)/1 system-ui,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
+.pause-score-center{text-align:center;color:#fbbf24;display:flex;flex-direction:column;gap:3px;font:900 10px system-ui,sans-serif;letter-spacing:1px}.pause-score-center span:last-child{color:#fff;font-size:18px;font-variant-numeric:tabular-nums}
+#pauseTop .jumbo{width:min(700px,100%);margin:2px auto 11px;padding-top:9px}
+#pauseTop .jb-frame{padding:10px;border-radius:16px;border:3px solid #152438;box-shadow:0 0 0 2px #70c4e5a8,0 14px 28px #000b,0 0 35px #38bdf833}
+#pauseTop .jb-frame canvas{image-rendering:auto;aspect-ratio:640/300;max-height:310px}
+#pauseTop .jb-tag{font:900 10px system-ui,sans-serif;letter-spacing:1.5px;background:#fbbf24;color:#102538}
+.pause-action-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:10px;align-items:stretch;margin-top:4px}
+#pauseOverlay .pause-action-grid .menu-btn{margin:0;min-width:0;padding:12px 10px;font:850 clamp(10px,1.1vw,13px) system-ui,sans-serif;letter-spacing:.15px;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:10px;text-align:center;box-shadow:inset 0 1px #ffffff40,0 5px 11px #0005}
+#pauseOverlay .pause-action-grid #resumeMatchBtn{background:linear-gradient(150deg,#32e9a2,#0baf70);color:#052e24;border-color:#92f7c7;font-size:14px;letter-spacing:0;animation:none}
+#pauseOverlay .pause-action-grid #resumeMatchBtn small{border-radius:5px;padding:4px 6px;background:#075c4066;font:750 10px system-ui,sans-serif}
+#pauseOverlay .pause-action-grid #quitMatchBtn{background:linear-gradient(#a53540,#73202e);border-color:#fa647c}
+.pause-help{width:min(940px,100%);margin:10px auto auto;padding:0 12px 12px;background:#06182bbd;border:1px solid #3f688b;border-radius:13px;color:#e2e8f0}
+.pause-help summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px;font:850 11px system-ui,sans-serif;letter-spacing:1px}.pause-help summary::-webkit-details-marker{display:none}.pause-help summary span{color:#7dd3fc;font-weight:700;font-size:10px}
+.pause-help .cgrid{padding:12px 8px}
+@media(max-width:700px){#pauseOverlay{padding:9px}#pauseTop{padding:13px 10px}.pause-status{display:none}.pause-score{grid-template-columns:minmax(0,1fr) auto 88px auto minmax(0,1fr);gap:7px;padding:9px}.pause-score-center span:last-child{font-size:15px}.pause-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#pauseTop .jumbo{width:100%}}
+@media(max-width:420px){.pause-head h2{font-size:22px}.pause-score strong{font-size:10px}.pause-score>b{font-size:23px}.pause-score{grid-template-columns:minmax(0,1fr) auto 64px auto minmax(0,1fr);gap:5px}.pause-score-center{font-size:8px}#pauseOverlay .pause-action-grid .menu-btn{font-size:10px}}
+
+/* Multiplayer tournament lobby */
+.tournament-panel{margin:12px 0;padding:14px;border:1px solid #426c99;border-radius:13px;background:linear-gradient(145deg,#091c36,#101d35);color:#e2efff;font:600 12px/1.5 system-ui,sans-serif}
+.tournament-title{font-size:13px;letter-spacing:1.5px;color:#93dcff;font-weight:900;margin-bottom:8px}
+.tournament-roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px}
+.tournament-seat{padding:9px;border:1px solid #355779;border-radius:9px;background:#142b49;min-height:58px}
+.tournament-seat strong{display:block;font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tournament-seat small{color:#a5c3df}.tournament-seat.empty{border-style:dashed;color:#759ab7;background:#0d1b30}
+.tournament-bracket{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.tournament-match{flex:1;min-width:170px;border:1px solid #446c91;background:#08162a;border-radius:9px;padding:8px;font-size:11px}
+.tournament-match b{color:#7dd3fc}.tournament-match span{display:block;margin-top:4px;color:#d7ebff}
+.tournament-match.current{border-color:#fbbf24;box-shadow:0 0 12px #fbbf2420}
 </style>
 </head>
 <body>
@@ -380,15 +422,12 @@ input[type=color]{width:30px;height:26px;border:0;background:none;cursor:pointer
     <!-- PAUSE -->
     <div id="pauseOverlay" class="overlay hidden">
       <div id="pauseTop">
-        <div class="jumbo"><div class="jb-cables"><i></i><i></i></div><div class="jb-frame"><div class="jb-bulbs"></div><canvas id="jumboCv" width="640" height="300"></canvas><div class="jb-bulbs"></div></div><div class="jb-tag retro">GAME PAUSED</div></div>
-        <button id="resumeMatchBtn" class="btn-green menu-btn play-big">RESUME (ESC)</button>
-        <div class="row" style="margin:4px 0">
-          <button id="cardsBtn2" class="btn-gold menu-btn">&#127183; HOCKEY CARDS <span id="cardsBtn2Count">0/32</span></button>
-          <button id="viewBtn2" class="btn-blue menu-btn" title="Cycle difficulty (Z)">DIFFICULTY: NORMAL</button>
-          <button id="quitMatchBtn" class="btn-red menu-btn">QUIT MATCH</button>
-        </div>
+        <div class="pause-head"><div><span class="pause-eyebrow">SNOWBOY HOCKEY / INTERMISSION</span><h2>MATCH PAUSED</h2><p>Take a look at the arena crowd, then get back on the ice.</p></div><span class="pause-status">● GAME ON HOLD</span></div>
+        <div class="pause-score" aria-label="Paused match scoreboard"><div><small>HOME</small><strong id="pauseHomeName">HOME</strong></div><b id="pauseHomeScore">0</b><div class="pause-score-center"><span id="pausePeriod">1ST PERIOD</span><span id="pauseClock">03:00</span></div><b id="pauseAwayScore">0</b><div class="pause-away"><small>AWAY</small><strong id="pauseAwayName">AWAY</strong></div></div>
+        <div class="jumbo"><div class="jb-cables"><i></i><i></i></div><div class="jb-frame"><div class="jb-bulbs"></div><canvas id="jumboCv" width="640" height="300" aria-label="Animated arena fan camera"></canvas><div class="jb-bulbs"></div></div><div class="jb-tag retro">ARENA FAN CAM · LIVE</div></div>
+        <div class="pause-action-grid"><button id="resumeMatchBtn" class="btn-green menu-btn play-big">▶ RESUME GAME <small>ESC</small></button><button id="cardsBtn2" class="btn-gold menu-btn">★ HOCKEY CARDS <span id="cardsBtn2Count">0/32</span></button><button id="viewBtn2" class="btn-blue menu-btn" title="Cycle difficulty (Z)">DIFFICULTY: NORMAL</button><button id="quitMatchBtn" class="btn-red menu-btn">QUIT MATCH</button></div>
       </div>
-      <div id="pauseControls" class="cgrid"></div>
+      <details class="pause-help"><summary>CONTROLS &amp; SHORTCUTS <span>SHOW / HIDE</span></summary><div id="pauseControls" class="cgrid"></div></details>
     </div>
 
     <!-- MAIN MENU -->
@@ -534,10 +573,12 @@ input[type=color]{width:30px;height:26px;border:0;background:none;cursor:pointer
     <h3>PLAY ONLINE <button id="onlineCloseBtn" class="x">&#10005;</button></h3>
     <div class="otabs"><button id="tabHost" class="menu-btn sel">HOST A GAME</button><button id="tabJoin" class="menu-btn">JOIN WITH CODE</button></div>
     <div id="hostPane">
-      <div class="onote" id="hostYou"></div>
-      <div class="field"><span>Mode</span><select id="onlineMode"><option value="quick">Quick Match</option><option value="playoff">Playoff Series</option></select></div>
+      <div class="onote" id="hostYou"></div><div class="field"><span>Your name</span><input id="hostPlayerName" maxlength="24" value="Host" placeholder="Host name"></div>
+      <div class="field"><span>Mode</span><select id="onlineMode"><option value="quick">Quick Match</option><option value="playoff">Playoff Series (1v1)</option><option value="tournament">Playoff Tournament (2 or 4 players)</option></select></div>
+      <div class="hidden" id="tourneyWrap"><div class="field"><span>Tournament size</span><select id="tourneySize"><option value="4" selected>4 players · semifinals + final</option><option value="2">2 players · final</option></select></div><div class="field"><span>Your team</span><select id="hostTeam"></select></div></div>
       <div class="field hidden" id="seriesWrap"><span>Series length</span><select id="seriesLen"><option value="3">Best of 3</option><option value="5" selected>Best of 5</option><option value="7">Best of 7</option></select></div>
-      <div class="onote">Playoff Series is online-only: no ties (overtime repeats until someone scores), first to win the majority takes the series. Games start automatically.</div>
+      <div class="onote">Playoff Series is a best-of-3/5/7 duel. Playoff Tournament supports 2 or 4 people, one game per elimination round, no ties, and all entrants choose a unique team. The host keeps the room open and runs each match, including guest-versus-guest games.</div>
+      <div id="tournamentHost" class="tournament-panel hidden"><div class="tournament-title">PLAYOFF LOBBY</div><div id="tourneyRoster" class="tournament-roster"></div><div id="tourneyBracket" class="tournament-bracket"></div><div class="onote">Send the invite link to each player. Everyone stays connected and watches the matches they are not playing.</div></div>
       <button id="genCodeBtn" class="btn-green menu-btn" style="width:100%">GENERATE INVITE CODE</button>
       <div id="codeBox" class="hidden">
         <div class="codeBig retro" id="codeText">-----</div>
@@ -548,11 +589,12 @@ input[type=color]{width:30px;height:26px;border:0;background:none;cursor:pointer
     </div>
     <div id="joinPane" class="hidden">
       <div class="field"><span>Invite code</span><input id="joinCode" maxlength="8" autocomplete="off" spellcheck="false" placeholder="ABCDE"></div>
-      <div class="field"><span>Your team</span><select id="joinTeam"></select></div>
+      <div class="field"><span>Player name</span><input id="joinName" maxlength="24" autocomplete="nickname" placeholder="Your name"></div><div class="field"><span>Your team</span><select id="joinTeam"></select></div>
+      <div id="tournamentGuest" class="tournament-panel hidden"><div class="tournament-title">TOURNAMENT LOBBY</div><div id="guestRoster" class="tournament-roster"></div><div id="guestBracket" class="tournament-bracket"></div><div class="onote" id="guestTournamentHint">Choose a team before joining. You may watch until your match begins.</div></div>
       <button id="joinBtn" class="btn-green menu-btn" style="width:100%">JOIN GAME</button>
       <div id="joinStatus" class="ostat"></div>
     </div>
-    <div class="onote" style="margin-top:12px">1v1 over a direct peer-to-peer link: the host's computer runs the game. Keep the host's tab in the foreground. No pause online.</div>
+    <div class="onote" style="margin-top:12px">Online matches use peer-to-peer connections. The host runs the games and must keep the tab open. Tournament spectators receive live snapshots. A stable connection is required; disconnected players may forfeit. No pause online.</div>
   </div>
 </div>
 
@@ -980,15 +1022,15 @@ const mouse = { sx: RINK.CX, sy: RINK.CY, x: RINK.CX, y: RINK.CY, leftDown: fals
 const CHARGE_FRAMES = 55;                                    // ~0.9 s of holding for a full-power slapshot
 /* Input is kept per team so an online opponent can drive the away side. inp[ME()] is always the local player's own keys/mouse. */
 const inp = { home: { keys, mouse }, away: { keys: {}, mouse: { x: RINK.CX, y: RINK.CY, leftDown: false, rightDown: false, chargeTime: 0, hadPuck: false } } };
-const net = { active: false, role: null, connected: false, mode: 'quick', series: null, tr: null, events: [], code: '', netAcc: 0, inAcc: 0, snapFirst: true, cd: null };
-function ME() { return net.role === 'guest' ? 'away' : 'home'; }
+const net = { active: false, role: null, connected: false, mode: 'quick', series: null, tr: null, events: [], code: '', netAcc: 0, inAcc: 0, snapFirst: true, cd: null, tour: null, playSide: null, seat: null };
+function ME() { return net.mode === 'tournament' ? (net.playSide || 'home') : net.role === 'guest' ? 'away' : 'home'; }
 let demoOn = false;                                          // main-menu attract mode: CPU vs CPU, silent, behind the menu
 let afkOn = false, lastInputAt = Date.now(); const AFK_MS = 6000;       // no mouse / keyboard for 6 s during play -> the CPU takes over your team until you move again
-function isHuman(t) { if (demoOn) return false; if (t === 'home' && afkOn && net.role !== 'guest') return false; return t === 'home' || (net.role === 'host' && net.connected); }
+function isHuman(t) { if (demoOn) return false; if (net.active && net.mode === 'tournament') return !!(net.tour && net.tour.current != null && (t === 'home' || t === 'away')); if (t === 'home' && afkOn && net.role !== 'guest') return false; return t === 'home' || (net.role === 'host' && net.connected); }
 function enterAfk() { if (afkOn) return; afkOn = true; setActive(null, 'home'); try { resetMice(); for (const k in keys) keys[k] = false; } catch (e) { } const b = $('afkBanner'); if (b) b.classList.remove('hidden'); try { showStatus('CPU TAKES OVER - YOU ARE AFK'); } catch (e) { } }
 function exitAfk() { lastInputAt = Date.now(); if (!afkOn) return; afkOn = false; const b = $('afkBanner'); if (b) b.classList.add('hidden'); try { ensureActivePlayer(); showStatus('WELCOME BACK - YOUR TURN!'); } catch (e) { } }
 function afkWatch(gs) {                                     // called every tick
-  const live = gs.running && !gs.paused && !gs.inIntro && !gs.anthem && !gs.handshake && !gs.zam && !demoOn && net.role !== 'guest';
+  const live = gs.running && !gs.paused && !gs.inIntro && !gs.anthem && !gs.handshake && !gs.zam && !demoOn && net.role !== 'guest' && !(net.active && net.mode === 'tournament' && net.playSide !== 'home');
   if (!live) { lastInputAt = Date.now(); if (afkOn && !gs.running) exitAfk(); return; }
   if (!afkOn && Date.now() - lastInputAt > AFK_MS) enterAfk();
 }
@@ -1010,7 +1052,10 @@ class CrowdSystem {
 
   init() {
     // rows: [baselineY, seat-step, amplitude]. Top stands sit above the top boards, bottom stands below the near boards.
-    const rows = [{ y: 22, depth: 0 }, { y: 44, depth: 1 }, { y: 552 + DY, depth: 0 }, { y: 574 + DY, depth: 1 }];
+    // The near-side stands have only a narrow visible strip below the rail.
+    // Place faces entirely BELOW the board/glass edge, not under the rink cache.
+    const rows = [{ y: 22, depth: 0 }, { y: 44, depth: 1 },
+      { y: RINK.B + 44, depth: 0 }, { y: RINK.B + 64, depth: 1 }];
     let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     rows.forEach((row, ri) => {
       for (let x = 40 + (ri % 2) * 11; x < W - 30; x += 23) {
@@ -1201,8 +1246,17 @@ class CrowdSystem {
     }
   }
 
-  draw() {
-    this.fans.forEach(f => this.drawFan(f));
+  draw(rows = 'far') {
+    // The far stands sit behind the rink. The near stands draw over the rink
+    // only BELOW its front glass; otherwise the board panels hide their heads.
+    const back = rows === 'near';
+    if (back) {
+      ctx.save(); ctx.beginPath(); ctx.rect(0, RINK.B + 16, W, H - RINK.B - 16); ctx.clip();
+      // Back row first: near/front row occludes people behind, not the reverse.
+      this.fans.filter(f => f.row === 3).forEach(f => this.drawFan(f));
+      this.fans.filter(f => f.row === 2).forEach(f => this.drawFan(f));
+      ctx.restore();
+    } else this.fans.filter(f => f.row < 2).forEach(f => this.drawFan(f));
   }
 
   drawConfetti() {
@@ -1920,7 +1974,7 @@ class Skater {
     this.hitHeat = 0; this.heatTimer = 0; this.fightBoost = 0; this.fighting = false; this.fallen = 0; this.punch = 0; this.shake = 0; this.hsArm = 0; this.pokeCD = 0; this.lagTimer = 0; this.breakaway = false;
     this.spinHeat = 0; this.spinCD = 0; this.spinImmune = 0; this.spinBonus = 0; this.spinStart = 0; this.spinDir = 1; this.stunImmune = 0;
     this.spot = null; this.spotCarrier = null; this.gi = null; this.idleCD = 150;
-    this.gkPose = 0; this.gkLean = 0; this.gkRecover = 0; this.gkDepth = 0;
+    this.gkPose = 0; this.gkLean = 0; this.gkRecover = 0; this.gkDepth = 0; this.gkReleaseProtection = 0;
     this.aiTimer = Math.floor(Math.random() * 10);
     this.perceivedPuck = { x, y }; this.reactionDelayTimer = Math.floor(Math.random() * 8); this.estimationError = { x: 0, y: 0 };
   }
@@ -2031,6 +2085,8 @@ class Skater {
     } else {
       this.updateSmartAI();
     }
+    // Goalie AI already applies its crease position directly. Do not move it a second time.
+    if (this.isGoalie && !gameState.inIntro) return;
     this.move();
   }
 
@@ -2315,6 +2371,7 @@ class Skater {
     if (this.lagTimer > 0) this.lagTimer--;
     if (this.pokeCD > 0) this.pokeCD--;
     if (this.gkRecover > 0) this.gkRecover--;
+    if (this.gkReleaseProtection > 0) this.gkReleaseProtection--;
     const car = puck.holder && puck.holder.team !== this.team && !puck.holder.isGoalie && !gameState.goalScored ? puck.holder : null;
     this.breakaway = !!(car && (car.x - goalX) * sgn > 0 && Math.abs(car.x - goalX) < 400 && rushInfo(car).defs === 0);
 
@@ -2383,7 +2440,7 @@ class Skater {
     if (puck.holder !== this) this.angle = face;
 
     // glove a loose puck that slows down nearby
-    if (Math.hypot(puck.x - this.x, puck.y - this.y) < 45 && !puck.holder && puck.passImmunityTimer === 0 && !gameState.goalScored && !puck.inNet && !(puck.shotDist != null && Math.hypot(puck.vx, puck.vy) > 6)) {   // live shots are judged by checkGoalieSave
+    if (this.gkReleaseProtection <= 0 && Math.hypot(puck.x - this.x, puck.y - this.y) < 45 && !puck.holder && puck.passImmunityTimer === 0 && !gameState.goalScored && !puck.inNet && !(puck.shotDist != null && Math.hypot(puck.vx, puck.vy) > 6)) {   // live shots are judged by checkGoalieSave
       puck.holder = this; gameState.goalieFreezeTimer = 0; this.gkRecover = 18;
     }
 
@@ -2397,17 +2454,24 @@ class Skater {
           let od = Infinity; players.filter(o => o.team !== this.team).forEach(o => { od = Math.min(od, Math.hypot(o.x - tm.x, o.y - tm.y)); });
           const sc = od * 2 - dist; if (sc > bestScore) { bestScore = sc; best = tm; }
         });
-        puck.holder = null; puck.lastHolder = this;
-        if (best && Math.random() < 0.85) {
-          showStatus(`${this.team.toUpperCase()} GOALIE PASSES!`);
-          launchPass(this, best, 11);
+        // Let the goalie distribute after a short secure hold. The puck must start
+        // beyond the crease and the goalie cannot re-glove its own outlet pass.
+        puck.holder = null; puck.carryHolder = null; puck.lastHolder = this;
+        this.gkReleaseProtection = 52;
+        if (best) {
+          showStatus(`${this.team.toUpperCase()} GOALIE OUTLET PASS!`);
+          launchPass(this, best, 14.5);
+          puck.passImmunityTimer = Math.max(puck.passImmunityTimer, 12);
+          puck.noPickup = this; puck.noPickupTimer = 52;
           if (isHuman(this.team)) setActive(best);
         } else {
           audioFX.playShot(0.8, 'slap'); showStatus(`${this.team.toUpperCase()} GOALIE CLEARS!`);
           const dirX = this.team === 'home' ? 1 : -1, clearY = this.y > RINK.CY ? RINK.T + 60 : RINK.B - 60;
           const ca = Math.atan2(clearY - this.y, dirX * 300);
-          puck.x = this.x + Math.cos(ca) * (this.radius + 14); puck.y = this.y + Math.sin(ca) * (this.radius + 14);
-          puck.vx = Math.cos(ca) * 13; puck.vy = Math.sin(ca) * 13; puck.passImmunityTimer = 20; puck.targetReceiver = null;
+          puck.x = this.x + Math.cos(ca) * (this.radius + 30); puck.y = this.y + Math.sin(ca) * (this.radius + 30);
+          puck.vx = Math.cos(ca) * 14; puck.vy = Math.sin(ca) * 14;
+          puck.passImmunityTimer = 18; puck.targetReceiver = null; puck.homingTimer = 0;
+          puck.noPickup = this; puck.noPickupTimer = 52;
         }
         gameState.goalieFreezeTimer = 0; this.gkRecover = 14;
       }
@@ -2444,7 +2508,7 @@ class Skater {
     }
     if (this.aura > 0.12) drawAura(this);
     // controlled-skater ring
-    const mine = this.isActive && !this.isGoalie && this.team === ME();
+    const mine = this.isActive && !this.isGoalie && this.team === ME() && !(net.active && net.mode === 'tournament' && !net.playSide);
     const foeCarrier = !!puck && puck.holder === this && this.team !== ME() && gameState.running && !gameState.fight;
     if (mine || foeCarrier) {                                   // green = the skater you control, red = the opponent with the puck
       const col = mine ? '34,197,94' : '239,68,68', pl = foeCarrier ? 1 + Math.sin(gameState.tick * 0.2) * 0.07 : 1;
@@ -3229,7 +3293,7 @@ function updateHud() {
   $('homeShots').textContent = gameState.homeShots; $('awayShots').textContent = gameState.awayShots;
   const m = String(Math.floor(gameState.timeRemaining / 60)).padStart(2, '0'), s = String(gameState.timeRemaining % 60).padStart(2, '0');
   $('hudClock').textContent = `${m}:${s}`;
-  const po = net.active && net.mode === 'playoff';
+  const po = net.active && (net.mode === 'playoff' || net.mode === 'tournament');
   let per = gameState.so ? 'SHOOTOUT' : gameState.period > 3 ? (po && gameState.period > 4 ? `${gameState.period - 3}OT` : 'OVERTIME') : `${gameState.period}${getOrdinal(gameState.period)} PERIOD`;
   if (po && net.series) per += ` \u00b7 PLAYOFFS G${net.series.game} (${net.series.hw}-${net.series.aw})`;
   $('hudPeriod').textContent = per;
@@ -3381,14 +3445,14 @@ function launchPass(passer, target, speed = null, bank = null) {
   if (bank) { if (bank.ax === 'x') { dx = (2 * bank.v - target.x) - passer.x; dy = target.y - passer.y; } else dy = (2 * bank.v - target.y) - passer.y; d = Math.hypot(dx, dy) || 1; }   // aim at the mirror image of the receiver, behind the boards
   const cpuP = !isHuman(passer.team);
   achEvent('pass', { team: passer.team, human: passer.isActive && !passer.isGoalie });
-  const sp = (speed ?? clamp(9 + d * 0.028, 11, 16.5)) * (cpuP ? 0.78 : 1);   // CPU passes are lazier, so they can be read and picked off
+  const sp = (speed ?? clamp(9 + d * 0.028, 11, 16.5)) * (passer.isGoalie ? 1 : cpuP ? 0.78 : 1);   // CPU passes are lazier, so they can be read and picked off
   const t = d / sp;
   const lx = clamp(target.x + target.vx * t * 0.85, RINK.L + 30, RINK.R - 30);
   const ly = clamp(target.y + target.vy * t * 0.85, RINK.T + 30, RINK.B - 30);
   const a = bank ? (bank.ax === 'x' ? Math.atan2(ly - passer.y, (2 * bank.v - lx) - passer.x) : Math.atan2((2 * bank.v - ly) - passer.y, lx - passer.x)) : Math.atan2(ly - passer.y, lx - passer.x);
   puck.holder = null; puck.inNet = null; puck.beaten = null; puck.spinShot = false; puck.shotDist = null; puck.shotBeat = null;
   audioFX.playPass();
-  puck.x = passer.x + Math.cos(a) * (passer.radius + 14); puck.y = passer.y + Math.sin(a) * (passer.radius + 14);
+  puck.x = passer.x + Math.cos(a) * (passer.radius + (passer.isGoalie ? 32 : 14)); puck.y = passer.y + Math.sin(a) * (passer.radius + (passer.isGoalie ? 32 : 14));
   puck.vx = Math.cos(a) * sp; puck.vy = Math.sin(a) * sp; puck.spinFactor = 0;
   puck.passImmunityTimer = 3; puck.noPickup = passer; puck.noPickupTimer = 22;
   puck.targetReceiver = target; puck.homingTimer = cpuP ? 62 : 45; puck.lastHolder = passer;
@@ -3626,6 +3690,7 @@ function startFaceoff(fx = null, fy = null, glide = false) {
   puck.reset(faceX, faceY);
   resetMice();
   players.forEach(p => {
+    p.gkReleaseProtection = 0; p.gkRecover = 0; p.gkPose = 0; p.gkLean = 0; p.gkDepth = 0;
     p.stunned = 0; p.spinning = false; p.blocking = false; p.vx = 0; p.vy = 0; p.stutterTimer = 0; p.celeb = null; p.celebT = 0; p.spinHeat = 0; p.spinBonus = 0; p.spinImmune = 0; p.stunImmune = 0; p.spinCD = 0; p.spot = null; p.fighting = false; p.fallen = 0; p.punch = 0; p.shake = 0; p.hsArm = 0; p.breakaway = false; p.lagTimer = 0;
     const s = p.team === 'home' ? -1 : 1;
     if (p.isGoalie) { p.x = defGoalX(p.team) + (p.team === 'home' ? 17 : -17); p.y = RINK.CY; }
@@ -3734,7 +3799,7 @@ function registerHit(att, vic) {
   const gs = gameState; if (!gs.running || vic.isGoalie || att.isGoalie) return;
   vic.hitHeat++; vic.heatTimer = 600;
   if (vic.hitHeat === 3) showStatus('TEMPERS ARE FLARING!');
-  if (vic.hitHeat >= 3 && !gs.pendingFight && canFight() && Math.random() < clamp((vic.hitHeat - 2) * 0.28 * (net.active && net.mode === 'playoff' ? 1.25 : 1), 0.1, 0.9)) gs.pendingFight = { victim: vic, attacker: att, delay: 30 };
+  if (vic.hitHeat >= 3 && !gs.pendingFight && canFight() && Math.random() < clamp((vic.hitHeat - 2) * 0.28 * (net.active && (net.mode === 'playoff' || net.mode === 'tournament') ? 1.25 : 1), 0.1, 0.9)) gs.pendingFight = { victim: vic, attacker: att, delay: 30 };
 }
 /* Goalie fights: running the goalie again and again can (very rarely) make him drop the gloves. */
 const GOALIE_FIGHT_ODDS = 1 / 1000;                           // per hit, once the same skater has run him 3+ times in ~10 s
@@ -3924,6 +3989,58 @@ function startFight(v, a) {
   const b = $('faceoffBanner'); b.textContent = 'FIGHT! SIT BACK AND WATCH - ENTER TO SKIP'; b.classList.remove('hidden');
   audioFX.playWhistle(); audioFX.playCrowdRoar(2.2); crowd.burst(0.8);
 }
+/* ---- Arcade-only fight interludes: soft novelty props, no real-world weapons ---- */
+const FIGHT_NOVELTIES = [
+  { id: 'chair', name: 'FOAM FOLDING CHAIR', color: '#67e8f9', sound: 'BONK!' },
+  { id: 'bat', name: 'INFLATABLE BAT', color: '#fbbf24', sound: 'BOING!' },
+  { id: 'ribbon', name: 'RIBBON STREAMER', color: '#f472b6', sound: 'WHOOSH!' },
+  { id: 'noodle', name: 'POOL NOODLE', color: '#a3e635', sound: 'SQUEAK!' },
+  { id: 'mallet', name: 'SQUEAKY TOY MALLET', color: '#c4b5fd', sound: 'POP!' }
+];
+function drawFightNovelty() {
+  const F = gameState.fight, prop = F && F.prop;
+  if (!F || !prop || F.phase !== 'brawl') return;
+  const age = (F.bt || 0) - prop.start;
+  if (age < 0 || age > 52) return;
+  const who = F.f ? F.f[prop.who] : players[(F.fp || [])[prop.who]];
+  if (!who) return;
+  const c = FIGHT_NOVELTIES[prop.kind % FIGHT_NOVELTIES.length], g = ctx;
+  const facing = prop.who ? -1 : 1;
+  const appear = Math.min(1, age / 9), fade = Math.min(1, (52 - age) / 12);
+  const swoop = Math.sin(Math.min(1, age / 40) * Math.PI), sway = Math.sin(age * .22);
+  const X = who.x + facing * (10 + swoop * 12), Y = who.y - 25 - Math.sin(age * .11) * 6;
+  g.save(); g.globalAlpha = Math.max(0, Math.min(appear, fade));
+  g.translate(X, Y); g.rotate(facing * (-.5 + swoop * .8 + sway * .12));
+  g.scale(facing, 1); g.lineJoin = 'round'; g.lineCap = 'round';
+  const outline = '#0f172a', line = (x0,y0,x1,y1,w,col)=>{g.strokeStyle=outline;g.lineWidth=w+3;g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.stroke();g.strokeStyle=col;g.lineWidth=w;g.stroke();};
+  if (c.id === 'chair') { // obviously cushioned, squishy novelty folding chair
+    line(-13,-20,13,-20,6,c.color); line(-12,-18,-12,10,5,c.color);
+    line(12,-18,12,10,5,c.color); line(-12,-1,12,-1,7,'#e0f2fe');
+    line(-12,9,10,-10,4,'#94a3b8'); line(12,9,-10,-10,4,'#94a3b8');
+    g.fillStyle='#e0f2fe';g.fillRect(-9,-20,18,6);
+  } else if (c.id === 'bat') { // oversized balloon, not a hard bat
+    line(0,16,0,-27,10,c.color);line(0,10,0,19,5,'#f8fafc');
+    g.fillStyle='#fff';g.beginPath();g.ellipse(-3,-16,2,7,-.2,0,7);g.fill();
+    g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.arc(0,-29,3,0,7);g.stroke();
+  } else if (c.id === 'ribbon') { // streamer floating in the air
+    line(0,15,0,-4,3,'#e2e8f0');
+    g.strokeStyle=outline;g.lineWidth=7;g.beginPath();g.moveTo(0,-5);g.bezierCurveTo(20,-24,-23,-34,4,-48);g.stroke();
+    g.strokeStyle=c.color;g.lineWidth=4;g.stroke();
+  } else if (c.id === 'noodle') {
+    line(0,15,3,-31,12,c.color);line(0,12,3,-29,6,'#d9f99d');
+  } else {
+    line(0,18,0,-16,5,'#f8fafc');
+    g.fillStyle=outline;g.beginPath();g.roundRect(-18,-35,36,23,9);g.fill();
+    g.fillStyle=c.color;g.beginPath();g.roundRect(-15,-32,30,17,7);g.fill();
+    g.fillStyle='#fff';g.fillRect(-9,-30,9,3);
+  }
+  g.restore();
+  if (age > 16 && age < 34) {
+    g.save();g.globalAlpha=Math.min(1,(age-16)/6,(34-age)/6);g.fillStyle='#fde047';
+    g.strokeStyle='#0f172a';g.lineWidth=3;g.font='bold 12px system-ui,sans-serif';
+    g.textAlign='center';g.strokeText(c.sound,X+facing*28,Y-33);g.fillText(c.sound,X+facing*28,Y-33);g.restore();
+  }
+}
 function stepFight() {
   const gs = gameState, F = gs.fight;
   if (F.freeze > 0) { F.freeze--; return; }                         // hit-stop: the whole brawl freezes for a few frames on a finisher's impact
@@ -3948,12 +4065,20 @@ function stepFight() {
       q.x += (tx - q.x) * 0.12; q.y += (ty - q.y) * 0.12; q.angle = i === 0 ? 0 : Math.PI; q.animFrame += 0.25;
     });
     if (F.t >= 45) {
-      F.phase = 'brawl'; F.bt = 0;
+      F.phase = 'brawl'; F.bt = 0; F.prop = null; F.lastProp = -1;
       [a, b].forEach((q, i) => { q.x = sp.x + (i === 0 ? -19 : 19); q.y = sp.y; F.drops.push({ x: q.x + (i ? 34 : -34), y: q.y + 12 + i * 6, kind: 'stick', ang: i ? 0.5 : -0.4 }); });   // only the sticks hit the ice: the helmets and gloves stay on in the artwork
       showStatus('GLOVES OFF! IT\'S ON!'); audioFX.playCrowdRoar(2.6); crowd.burst(1);
     }
   } else if (F.phase === 'brawl') {
     F.bt++;
+    // A random soft novelty prop appears briefly. Purely visual: it never
+    // changes damage, collision, controls, or match outcome.
+    if (F.bt === 42 || F.bt === 110 || F.bt === 178 || F.bt === 246) {
+      let kind = Math.floor(Math.random() * FIGHT_NOVELTIES.length);
+      if (kind === F.lastProp) kind = (kind + 1) % FIGHT_NOVELTIES.length;
+      F.lastProp = kind;
+      F.prop = { kind, who: Math.random() < .5 ? 0 : 1, start: F.bt };
+    }
     // Sparring footwork: advance, pivot, recoil and circle the center while keeping the
     // combatants in contact range. The fight no longer occurs at two frozen coordinates.
     const orbit = Math.sin(F.bt * 0.027) * 0.24;
@@ -4466,7 +4591,7 @@ function quitMatch() {
    PAUSE SCREEN: THE JUMBOTRON - random fan cams (kiss cam, look-alike, dance, noise, shirt, flex, hot dog)
    ===================================================================== */
 const JB = { raf: 0, on: false, seg: null, last: null, t: 0, cv: null, g: null, fans: [], v: 0 };
-const JB_SEGS = ['kiss', 'look', 'dance', 'noise', 'shirt', 'flex', 'hotdog'], JB_LEN = 330, JB_INK = '#0b1220';
+const JB_SEGS = ['crowd', 'kiss', 'look', 'dance', 'noise', 'shirt', 'flex', 'hotdog'], JB_LEN = 330, JB_INK = '#0b1220';
 const jbPick = a => a[Math.floor(Math.random() * a.length)];
 const jbNewFan = () => ({ skin: jbPick(['#f1c9a0', '#e0ac69', '#c68642', '#8d5524', '#fde7c8']), hair: jbPick(['#2b1a10', '#7c4a1e', '#d6a84a', '#c0392b', '#1f2937', '#9ca3af', '#7c3aed']), style: jbPick(['short', 'long', 'bun', 'bald', 'mohawk', 'cap', 'short', 'long']), shirt: jbPick(['#ef4444', '#3b82f6', '#22c55e', '#eab308', '#a855f7', '#f97316', '#14b8a6', '#ec4899']), glass: Math.random() < 0.3, beard: Math.random() < 0.22 });
 const JB_CELEBS = [['WIZARD OF THE NORTH', 'wizard'], ['SECRET AGENT MAN', 'agent'], ['DISCO LEGEND', 'disco'], ['ROCK GOD', 'rock'], ['MASKED AVENGER', 'hero'], ['FANCY CHEF', 'chef']];
@@ -4517,13 +4642,38 @@ function jbWord(g, txt, x, y, size, fill, rot = 0) { g.save(); g.translate(x, y)
 function jbStart(seg) {
   JB.seg = seg; JB.t = 0; JB.last = seg; JB.fans = [jbNewFan(), jbNewFan(), jbNewFan(), jbNewFan(), jbNewFan(), jbNewFan()];
   JB.var = Math.random(); JB.celeb = jbPick(JB_CELEBS); JB.pct = 92 + Math.floor(Math.random() * 8); JB.db = 98 + Math.floor(Math.random() * 14);
-  JB.caps = { kiss: 'KISS CAM! SMOOCH TIME!', look: 'CELEBRITY LOOK-ALIKE CAM!', dance: 'DANCE CAM! SHOW US YOUR MOVES!', noise: 'NOISE METER! MAKE SOME NOISE!', shirt: 'T-SHIRT CANNON CAM!', flex: 'FLEX CAM! SHOW THE GUNS!', hotdog: 'HOT DOG CAM! EAT UP!' }[seg];
+  JB.caps = { crowd: 'SECTION 117 · FAN SPOTLIGHT!', kiss: 'KISS CAM! SMOOCH TIME!', look: 'CELEBRITY LOOK-ALIKE CAM!', dance: 'DANCE CAM! SHOW US YOUR MOVES!', noise: 'NOISE METER! MAKE SOME NOISE!', shirt: 'T-SHIRT CANNON CAM!', flex: 'FLEX CAM! SHOW THE GUNS!', hotdog: 'HOT DOG CAM! EAT UP!' }[seg];
 }
-function jbBg(g, W, Hh, a, b) { const gr = g.createLinearGradient(0, 0, 0, Hh); gr.addColorStop(0, a); gr.addColorStop(1, b); g.fillStyle = gr; g.fillRect(0, 0, W, Hh); }
+function jbBg(g, W, Hh, a, b) {
+  const gr = g.createLinearGradient(0, 0, 0, Hh); gr.addColorStop(0, a); gr.addColorStop(1, b); g.fillStyle = gr; g.fillRect(0, 0, W, Hh);
+  // Layered arena spectators keep the jumbotron looking like a camera feed
+  // rather than a flat stage. Foreground fans are drawn above this backdrop.
+  g.save(); const tick = JB.v || 0;
+  for (let row = 0; row < 3; row++) {
+    const size = 7 + row * 3, cy = 78 + row * 50, n = 34 - row * 3;
+    for (let i = 0; i < n; i++) {
+      const x = (i + 0.5 * (row % 2)) * W / n, sway = Math.sin(tick * 0.042 + i * 1.8 + row) * (1.2 + row * 0.4), y = cy + sway;
+      g.fillStyle = ['#12243c','#1c3454','#243b59'][row]; g.beginPath(); g.ellipse(x, y + size * 2.0, size * 1.15, size * 1.85, 0, 0, 7); g.fill();
+      g.fillStyle = ['#c89566','#f1c9a0','#9f6949','#e0ac69'][(i + row * 3) % 4]; g.beginPath(); g.arc(x, y, size * 0.66, 0, 7); g.fill();
+      g.fillStyle = ['#334155','#dc2626','#eab308','#38bdf8'][((i * 7 + row * 5) % 4)]; g.fillRect(x - size * 0.4, y - size * .76, size * .8, size * .36);
+    }
+  }
+  const tint = g.createLinearGradient(0, 0, 0, Hh); tint.addColorStop(0,'#07142a22'); tint.addColorStop(1,'#030712a8'); g.fillStyle = tint; g.fillRect(0, 0, W, Hh);
+  g.restore();
+}
 function jbDraw() {
   const g = JB.g, W = 640, Hh = 300, t = JB.t, v = ++JB.v, seg = JB.seg, F = JB.fans, prog = t / JB_LEN;
   g.save(); g.clearRect(0, 0, W, Hh);
-  if (seg === 'kiss') {
+  if (seg === 'crowd') {
+    jbBg(g, W, Hh, '#164e63', '#082f49');
+    const glow = g.createRadialGradient(W / 2, 150, 8, W / 2, 150, 300); glow.addColorStop(0, '#7dd3fc55'); glow.addColorStop(1,'#082f4900'); g.fillStyle = glow; g.fillRect(0, 0, W, Hh);
+    for (let i = 0; i < 5; i++) {
+      const x = 70 + i * 126, s = i === 2 ? 1.7 : 1.33, yy = 166 + (i % 2) * 15;
+      const bounce = Math.sin(v * 0.12 + i * 1.65) * (i === 2 ? 12 : 7);
+      jbFan(g, F[i], x, yy, s, { bob: bounce, tilt: Math.sin(v * 0.08 + i) * 0.11, eyes: i % 2 ? 'happy' : 'wide', mouth: (v + i * 23) % 100 < 48 ? 'open' : 'smile', armL: [-42, -22 - bounce * 0.6], armR: [40, -24 + bounce * 0.4] });
+    }
+    jbWord(g, 'MAKE SOME NOISE!', W / 2, 260, 35, '#fde68a', Math.sin(v * 0.08) * 0.02);
+  } else if (seg === 'kiss') {
     jbBg(g, W, Hh, '#9d174d', '#4a044e'); for (let i = 0; i < 14; i++) jbHeart(g, (i * 97 + v * 0.4) % W, Hh - ((v * 0.8 + i * 61) % (Hh + 40)), 0.6 + (i % 3) * 0.3, '#fb7185', 0.35);
     const pulse = 1 + Math.sin(v * 0.15) * 0.03;
     g.save(); g.translate(W / 2, 168); g.scale(pulse, pulse); g.strokeStyle = '#fda4af'; g.lineWidth = 7; g.shadowColor = '#f43f5e'; g.shadowBlur = 18; g.beginPath(); g.moveTo(0, 110); g.bezierCurveTo(-250, -30, -150, -150, 0, -50); g.bezierCurveTo(150, -150, 250, -30, 0, 110); g.stroke(); g.restore();
@@ -4643,6 +4793,12 @@ function setPaused(p, byModal = false) {
   if (!gameState.running) return;
   gameState.paused = p; gameState.pausedByModal = p && byModal;
   $('pauseOverlay').classList.toggle('hidden', !p || byModal);
+  if (p && !byModal) {
+    const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+    setText('pauseHomeName', fullName(gameState.homeTeam)); setText('pauseAwayName', fullName(gameState.awayTeam));
+    setText('pauseHomeScore', gameState.homeScore); setText('pauseAwayScore', gameState.awayScore);
+    setText('pauseClock', $('hudClock').textContent); setText('pausePeriod', $('hudPeriod').textContent);
+  }
   try { if (p && !byModal) jumboStart(); else jumboStop(); } catch (e) { }
   try { if (p && !byModal) pauseMusicStart(); else pauseMusicStop(); } catch (e) { }
   if (p) { Object.keys(keys).forEach(k => keys[k] = false); mouse.leftDown = false; mouse.chargeTime = 0; }
@@ -4660,11 +4816,11 @@ function updateClock() {
         showStatus(`END OF ${gameState.period}${getOrdinal(gameState.period)} PERIOD`);
         const nextPeriod = () => { gameState.period++; gameState.timeRemaining = gameState.periodLength; updateHud(); startFaceoff(); commentate('period'); };
         if (!net.active && !demoOn) startZam(nextPeriod); else nextPeriod();            // intermission: the Zamboni 500
-      } else if (gameState.period === 4 && gameState.homeScore === gameState.awayScore && !(net.active && net.mode === 'playoff')) {
+      } else if (gameState.period === 4 && gameState.homeScore === gameState.awayScore && !(net.active && (net.mode === 'playoff' || net.mode === 'tournament'))) {
         showStatus('STILL TIED! SHOOTOUT TIME!'); startShootout();
-      } else if ((gameState.period === 3 || (gameState.period > 3 && net.active && net.mode === 'playoff')) && gameState.homeScore === gameState.awayScore) {
+      } else if ((gameState.period === 3 || (gameState.period > 3 && net.active && (net.mode === 'playoff' || net.mode === 'tournament'))) && gameState.homeScore === gameState.awayScore) {
         gameState.period++; gameState.timeRemaining = Math.min(120, gameState.periodLength); updateHud();
-        showStatus(net.active && net.mode === 'playoff' ? (gameState.period === 4 ? 'PLAYOFF OVERTIME! 5-ON-5 - NEXT GOAL WINS!' : `STILL TIED! ${gameState.period - 3}OT - 5-ON-5, NEXT GOAL WINS!`) : 'TIED! 5-ON-5 SUDDEN-DEATH OVERTIME - THEN A SHOOTOUT!'); startFaceoff();
+        showStatus(net.active && (net.mode === 'playoff' || net.mode === 'tournament') ? (gameState.period === 4 ? 'PLAYOFF OVERTIME! 5-ON-5 - NEXT GOAL WINS!' : `STILL TIED! ${gameState.period - 3}OT - 5-ON-5, NEXT GOAL WINS!`) : 'TIED! 5-ON-5 SUDDEN-DEATH OVERTIME - THEN A SHOOTOUT!'); startFaceoff();
       } else endGame();
     }
   }
@@ -5243,8 +5399,9 @@ function drawSinger() {
 }
 function renderScene() {
   ctx.drawImage(standsCache, 0, 0, W, H);
-  crowd.draw();
+  crowd.draw('far');
   ctx.drawImage(rinkCache, 0, 0, W, H);
+  crowd.draw('near');
   try { crowd.drawFx(); } catch (e) { }
 
   // goal lamp + glow
@@ -5296,6 +5453,7 @@ function renderScene() {
     else puck.draw();
   }
   try { drawFinOver(); } catch (e) { }
+  drawFightNovelty();
   drawSinger();
   try { drawIntros(); } catch (e) { }
   if (gameState.running && !gameState.paused && !gameState.inFaceoff && !gameState.goalScored && !gameState.inIntro && !gameState.fight && !gameState.handshake && !gameState.so) {   // offside warning over anyone ahead of the puck
@@ -5498,8 +5656,8 @@ window.addEventListener('keydown', e => {
   if (k === 'v' && !modalOpen()) { tts.toggle(); return; }
   if (k === 'enter' && (!gameState.running || demoOn) && !$('menuOverlay').classList.contains('hidden') && !modalOpen() && $('onlineOverlay').classList.contains('hidden') && $('netOverOverlay').classList.contains('hidden')) { audioFX.init(); startMatch(); return; }
   if (demoOn) return;
-  if (net.role === 'guest') { if (net.connected) netSend({ t: 'k', k, code: e.code }); return; }
-  inputKey('home', k, e.code);
+  if (net.role === 'guest') { if (net.connected && (net.mode !== 'tournament' || net.playSide)) netSend({ t: 'k', k, code: e.code }); return; }
+  if (net.mode !== 'tournament' || net.playSide) inputKey(net.mode==='tournament'?net.playSide:'home', k, e.code);
 });
 window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
 window.addEventListener('blur', () => { Object.keys(keys).forEach(k => keys[k] = false); mouse.leftDown = false; if (!net.active && !demoOn && gameState.running && !gameState.inIntro && !gameState.paused) setPaused(true); });
@@ -5514,12 +5672,12 @@ function applyMouse() { mouse.x = cam.x + mouse.sx / cam.z; mouse.y = cam.y + mo
 canvas.addEventListener('mousemove', updateMouse);
 canvas.addEventListener('mousedown', e => {
   updateMouse(e); audioFX.init();
-  if (net.role === 'guest') { if (net.connected && gameState.running) netSend({ t: 'md', b: e.button, x: mouse.x, y: mouse.y }); return; }
-  inputMouseDown('home', e.button);
+  if (net.role === 'guest') { if (net.connected && gameState.running && (net.mode !== 'tournament' || net.playSide)) netSend({ t: 'md', b: e.button, x: mouse.x, y: mouse.y }); return; }
+  if (net.mode !== 'tournament' || net.playSide) inputMouseDown(net.mode==='tournament'?net.playSide:'home', e.button);
 });
 window.addEventListener('mouseup', e => {                    // window-level so releasing outside the canvas can never leave a stuck button
-  if (net.role === 'guest') { if (net.connected && gameState.running) netSend({ t: 'mu', b: e.button }); return; }
-  inputMouseUp('home', e.button);
+  if (net.role === 'guest') { if (net.connected && gameState.running && (net.mode !== 'tournament' || net.playSide)) netSend({ t: 'mu', b: e.button }); return; }
+  if (net.mode !== 'tournament' || net.playSide) inputMouseUp(net.mode==='tournament'?net.playSide:'home', e.button);
 });
 canvas.addEventListener('contextmenu', e => e.preventDefault());
 
@@ -5541,38 +5699,53 @@ function peerOpts() {
   return h ? { host: h, port: +(q.get('peerport') || 9000), path: '/', secure: false, debug: 0 } : { debug: 0 };
 }
 function openPeer(P, code, role, h) {
-  const id = 'snowboyhockey-' + code; let peer, conn = null;
-  const wire = c => { c.on('open', () => h.onOpen()); c.on('data', d => h.onMsg(d)); c.on('close', () => { if (conn === c) conn = null; h.onClose(); }); c.on('error', e => h.onError(e)); };
+  const id = 'snowboyhockey-' + code; let peer, conn = null; const conns = new Map();
+  const wire = c => {
+    c.on('open', () => { if (role === 'guest') h.onOpen(c.peer); else h.onOpen(c.peer); });
+    c.on('data', d => h.onMsg(d, c.peer));
+    c.on('close', () => { if (role === 'host') conns.delete(c.peer); else if (conn === c) conn = null; h.onClose(c.peer); });
+    c.on('error', e => h.onError(e));
+  };
   if (role === 'host') {
     peer = new P(id, peerOpts());
     peer.on('open', () => h.onReady());
-    peer.on('connection', c => { if (conn) { try { c.close(); } catch (e) { } return; } conn = c; wire(c); });
+    peer.on('connection', c => {
+      if (net.mode !== 'tournament' && conns.size) { try { c.close(); } catch (e) {} return; }
+      if (conns.has(c.peer)) { try { c.close(); } catch (e) {} return; }
+      conns.set(c.peer, c); wire(c);
+    });
   } else {
     peer = new P(undefined, peerOpts());
     peer.on('open', () => { conn = peer.connect(id, { reliable: true, serialization: 'json' }); wire(conn); });
   }
   peer.on('error', e => h.onError(e));
-  return { send: m => { if (conn && conn.open) conn.send(m); }, close: () => { try { conn && conn.close(); } catch (e) { } try { peer.destroy(); } catch (e) { } } };
+  return {
+    send(m, to) { if (role === 'host') { for (const [id,c] of conns) if (c.open && (!to || id === to)) c.send(m); } else if (conn && conn.open) conn.send(m); },
+    close() { try { for (const c of conns.values()) c.close(); if (conn) conn.close(); peer.destroy(); } catch (e) {} }
+  };
 }
 function openLocal(code, role, h) {
-  const ch = new BroadcastChannel('snowboy-' + code), me = Math.random().toString(36).slice(2); let seen = false, iv = null;
+  const ch = new BroadcastChannel('snowboy-' + code), me = Math.random().toString(36).slice(2), peers = new Set(); let seen = false, iv = null;
   ch.onmessage = ev => {
-    const m = ev.data; if (!m || m.from === me) return;
-    if (m.sys === 'hello' && role === 'host' && !seen) { seen = true; ch.postMessage({ sys: 'welcome', from: me }); h.onOpen(); }
-    else if (m.sys === 'welcome' && role === 'guest' && !seen) { seen = true; clearInterval(iv); h.onOpen(); }
-    else if (m.sys === 'bye') h.onClose();
-    else if (m.data) h.onMsg(m.data);
+    const m = ev.data; if (!m || m.from === me || (m.to && m.to !== me)) return;
+    if (m.sys === 'hello' && role === 'host') {
+      if (net.mode !== 'tournament' && peers.size && !peers.has(m.from)) return;
+      if (!peers.has(m.from)) { peers.add(m.from); h.onOpen(m.from); }
+      ch.postMessage({ sys:'welcome', from:me, to:m.from });
+    } else if (m.sys === 'welcome' && role === 'guest' && !seen) { seen = true; clearInterval(iv); h.onOpen(m.from); }
+    else if (m.sys === 'bye') { peers.delete(m.from); h.onClose(m.from); }
+    else if (m.data && (role !== 'host' || peers.has(m.from))) h.onMsg(m.data, m.from);
   };
   if (role === 'host') setTimeout(() => h.onReady(), 0);
-  else { let n = 0; ch.postMessage({ sys: 'hello', from: me }); iv = setInterval(() => { if (seen) return clearInterval(iv); if (++n > 8) { clearInterval(iv); h.onError({ type: 'peer-unavailable' }); } else ch.postMessage({ sys: 'hello', from: me }); }, 500); }
-  return { send: d => ch.postMessage({ from: me, data: d }), close: () => { clearInterval(iv); try { ch.postMessage({ sys: 'bye', from: me }); ch.close(); } catch (e) { } } };
+  else { let n = 0; ch.postMessage({sys:'hello',from:me}); iv = setInterval(() => { if (seen) return clearInterval(iv); if (++n > 16) { clearInterval(iv); h.onError({type:'peer-unavailable'}); } else ch.postMessage({sys:'hello',from:me}); }, 500); }
+  return {send: (d,to) => ch.postMessage({from:me,to:to||null,data:d}), close:() => {clearInterval(iv);try {ch.postMessage({sys:'bye',from:me});ch.close();}catch(e){}}};
 }
 function openTransport(code, role, h) {
   const P = PeerCtor();
   if (P && !new URLSearchParams(location.search).has('local')) { net.local = false; return openPeer(P, code, role, h); }
   net.local = true; return openLocal(code, role, h);
 }
-function netSend(m) { if (net.tr) { try { net.tr.send(m); } catch (e) { console.warn('net send', e); } } }
+function netSend(m, to = null) { if (net.tr) { try { net.tr.send(m, to); } catch (e) { console.warn('net send', e); } } }
 
 /* host only: mirror every sound / status line / effect to the guest */
 (function () {                                                // banner turns green the moment the puck is dropped
@@ -5601,7 +5774,7 @@ function buildSnapshot() {
     hs: gs.homeScore, as: gs.awayScore, hsh: gs.homeShots, ash: gs.awayShots, per: gs.period, tr: gs.timeRemaining,
     intro: gs.inIntro ? 1 : 0, fo: gs.inFaceoff ? 1 : 0, fos: gs.faceoffState, ft: gs.faceoffTimer | 0, fxy: [gs.faceX ?? -1, gs.faceY ?? -1], gl: gs.goalScored ? 1 : 0, gf: gs.goalFlash,
     mom: gs.mom, hk: gs.handshake ? 1 : 0, sg: gs.singer ? gs.singer.t : -1, sgd: gs.singer ? (gs.singer.dur || 0) : 0, so: gs.so ? { m: gs.so.marks, g: gs.so.goals, tu: gs.so.turn, sd: gs.so.sd } : null,
-    fight: gs.fight ? { sl: gs.fight.slow || 0, sd: gs.fight.slowDur || 0, phase: gs.fight.phase, t: gs.fight.t, cam: gs.fight.cam || 0, spot: gs.fight.spot, drops: gs.fight.drops, hp: gs.fight.hp, fp: gs.fight.f.map(q => players.indexOf(q)), fk: gs.fight.fk == null ? -1 : gs.fight.fk, ft: gs.fight.finT || 0, fw: gs.fight.fw == null ? -1 : gs.fight.fw } : null
+    fight: gs.fight ? { sl: gs.fight.slow || 0, sd: gs.fight.slowDur || 0, phase: gs.fight.phase, t: gs.fight.t, cam: gs.fight.cam || 0, spot: gs.fight.spot, drops: gs.fight.drops, bt: gs.fight.bt || 0, prop: gs.fight.prop || null, hp: gs.fight.hp, fp: gs.fight.f.map(q => players.indexOf(q)), fk: gs.fight.fk == null ? -1 : gs.fight.fk, ft: gs.fight.finT || 0, fw: gs.fight.fw == null ? -1 : gs.fight.fw } : null
   };
   const fb = $('faceoffBanner'), am = inp.away.mouse, ap = getActivePlayer('away');
   const u = { fb: fb.classList.contains('hidden') ? null : fb.textContent, ct: am.chargeTime, ld: am.leftDown ? 1 : 0, sb: ap ? Math.min(100, ap.spinHeat / 1.6 * 100) : 0, ot: gs.otTeam === 'away' ? 1 : 0 };
@@ -5661,14 +5834,15 @@ function stepGuest() {
 function netPump(dt) {
   if (!net.connected || !gameState.running) return;
   if (net.role === 'host') { net.netAcc += dt; if (net.netAcc >= 32) { net.netAcc = 0; netSend(buildSnapshot()); } }
-  else if (net.role === 'guest') { net.inAcc += dt; if (net.inAcc >= 32) { net.inAcc = 0; netSend({ t: 'in', keys: Object.keys(keys).filter(k => keys[k]), mx: Math.round(mouse.x), my: Math.round(mouse.y) }); } }
+  else if (net.role === 'guest' && (net.mode!=='tournament'||net.playSide)) { net.inAcc += dt; if (net.inAcc >= 32) { net.inAcc = 0; netSend({ t: 'in', keys: Object.keys(keys).filter(k => keys[k]), mx: Math.round(mouse.x), my: Math.round(mouse.y) }); } }
 }
 
-function netOnMsg(m) {
+function netOnMsg(m, peerId) {
   if (!m || !m.t) return;
-  try { if (net.role === 'host') hostMsg(m); else if (net.role === 'guest') guestMsg(m); } catch (e) { console.error('net message error', e); }
+  try { if (net.role === 'host') hostMsg(m, peerId); else if (net.role === 'guest') guestMsg(m); } catch (e) { console.error('net message error', e); }
 }
-function hostMsg(m) {
+function hostMsg(m, peerId) {
+  if (net.mode === 'tournament') { tournamentHostMsg(m, peerId); return; }
   if (m.t === 'join') {
     if (gameState.running) return;
     gameState.awayTeam = { ...CITY_TEAMS[(m.team | 0) % CITY_TEAMS.length] };
@@ -5687,6 +5861,7 @@ function hostMsg(m) {
   else if (m.t === 'mu') inputMouseUp('away', m.b | 0);
 }
 function guestMsg(m) {
+  if (net.mode === 'tournament' || m.t === 'tourError' || m.t === 'tour' || (m.t === 'hello' && m.mode === 'tournament')) { tournamentGuestMsg(m); return; }
   if (m.t === 'hello') {
     net.connected = true; clearTimeout(net.joinTO); net.mode = m.mode;
     setText('joinStatus', `Connected to the ${m.home.city} host${m.mode === 'playoff' ? ` - PLAYOFF SERIES, best of ${m.best}` : ''}. Waiting for the host to start... You play as AWAY and attack the LEFT net.`);
@@ -5700,11 +5875,12 @@ function startGuestMatch(m) {
   gameState = Object.assign(freshGameState(), { homeTeam: m.home, awayTeam: m.away, periodLength: m.len, timeRemaining: m.len });
   gameState.running = true; gameState.inIntro = !!m.intro;
   net.series = m.series; net.mode = m.mode; net.snapFirst = true;
+  if (m.mode === 'tournament') { net.playSide = m.side || null; inp.home = freshAwayInput(); inp.away = freshAwayInput(); if (net.playSide) inp[net.playSide] = { keys, mouse }; }
   Object.keys(keys).forEach(k => keys[k] = false); mouse.leftDown = false; mouse.chargeTime = 0;
   crowd.confetti.length = 0; crowd.energy = 0; effects.length = 0;
   ['pauseOverlay', 'faceoffBanner', 'oneTimerBanner', 'netOverOverlay', 'onlineOverlay', 'menuOverlay', 'menuResult'].forEach(i => $(i).classList.add('hidden'));
   rebuildBackgrounds(); initPlayers(); puck.reset(RINK.CX, RINK.CY); updateHud(); netUI();
-  showStatus(m.mode === 'playoff' ? `PLAYOFFS - GAME ${m.series.game} - BEST OF ${m.series.best}` : 'ONLINE MATCH - YOU ARE AWAY, ATTACK LEFT');
+  showStatus(m.mode === 'tournament' ? (m.side ? `TOURNAMENT: YOU PLAY ${m.side.toUpperCase()}` : 'TOURNAMENT: WATCHING LIVE') : m.mode === 'playoff' ? `PLAYOFFS - GAME ${m.series.game} - BEST OF ${m.series.best}` : 'ONLINE MATCH - YOU ARE AWAY, ATTACK LEFT');
 }
 
 function netUI() { $('leaveOnlineBtn').classList.toggle('hidden', !(net.active && gameState.running)); }
@@ -5712,7 +5888,8 @@ function netTeardown() {
   if (net.cd) { clearInterval(net.cd); net.cd = null; }
   clearTimeout(net.joinTO);
   if (net.tr) { try { net.tr.close(); } catch (e) { } net.tr = null; }
-  net.active = false; net.role = null; net.connected = false; net.mode = 'quick'; net.series = null; net.events.length = 0; net.snapFirst = true;
+  net.active = false; net.role = null; net.connected = false; net.mode = 'quick'; net.series = null; net.tour = null; net.playSide = null; net.seat = null; net.events.length = 0; net.snapFirst = true;
+  ['tournamentHost','tournamentGuest'].forEach(id => $(id).classList.add('hidden')); 
   inp.home = { keys, mouse }; inp.away = freshAwayInput();
   $('leaveOnlineBtn').classList.add('hidden'); $('netOverOverlay').classList.add('hidden'); $('joinBtn').disabled = false;
   updateHud();
@@ -5726,8 +5903,9 @@ function netFail(e) {
   netTeardown();
   setText(wasHost ? 'hostStatus' : 'joinStatus', msg); $('hostStartBtn').classList.add('hidden'); $('codeBox').classList.add('hidden');
 }
-function netPeerGone() {
+function netPeerGone(peerId) {
   if (!net.active) return;
+  if (net.mode === 'tournament' && net.role === 'host') { tournamentPeerGone(peerId); return; }
   const live = gameState.running || !$('netOverOverlay').classList.contains('hidden');
   if (net.role === 'host' && !live) {
     net.connected = false; $('hostStartBtn').classList.add('hidden'); setText('hostStatus', 'Opponent left. Waiting for someone to join...'); return;
@@ -5737,12 +5915,166 @@ function netPeerGone() {
   setText('menuResult', 'OPPONENT DISCONNECTED'); $('menuResult').classList.remove('hidden');
 }
 
+/* ---- knockout playoffs: the room owner is authoritative, even for guest-v-guest matches ---- */
+function tournamentTeamIndex(team) {
+  const i = CITY_TEAMS.findIndex(t => t.city === team.city && t.name === team.name);
+  return i < 0 ? 0 : i;
+}
+function tournamentNew(size) {
+  net.tour = { size: size === 2 ? 2 : 4, players: [{peer:'host', name:($('hostPlayerName').value||'Host').slice(0,24), team:+$('hostTeam').value}], matches:[], current:null, started:false, champion:null };
+  net.seat = 0; net.playSide = null;
+  $('tournamentHost').classList.remove('hidden'); $('tournamentGuest').classList.add('hidden');
+  tournamentRender();
+}
+function tournamentRosterHtml(T) {
+  return Array.from({length:T.size}, (_,i) => {
+    const p = T.players[i];
+    if (!p) return `<div class="tournament-seat empty"><strong>OPEN SLOT ${i+1}</strong><small>Waiting for invite...</small></div>`;
+    const city = CITY_TEAMS[p.team]?.city || 'Unknown team';
+    return `<div class="tournament-seat"><strong>${i+1}. ${tournamentEsc(p.name)}</strong><small>${tournamentEsc(city)}${p.gone?' · DISCONNECTED':''}${p.peer==='host'||p.host?' · HOST':''}</small></div>`;
+  }).join('');
+}
+function tournamentEsc(s) { return String(s||'').replace(/[&<>"']/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function tournamentMatchHtml(T) {
+  const label = m => T.players[m] ? `${T.players[m].name} (${CITY_TEAMS[T.players[m].team]?.city||'Team'})` : 'TBD';
+  if (!T.matches.length) return '<div class="tournament-match"><b>READY TO SEED</b><span>Bracket is created when all players join.</span></div>';
+  return T.matches.map((m,i) => `<div class="tournament-match ${T.current===i?'current':''}"><b>${m.round===1?'FINAL':'SEMIFINAL '+(i+1)}${m.winner!=null?' ✓':''}</b><span>${tournamentEsc(label(m.a))}</span><span>VS ${tournamentEsc(label(m.b))}</span>${m.winner!=null?`<span>Winner: ${tournamentEsc(T.players[m.winner]?.name||'—')}</span>`:''}</div>`).join('');
+}
+function tournamentPublic() {
+  const T = net.tour; if (!T) return null;
+  return {size:T.size, players:T.players.map(p => ({name:p.name,team:p.team,gone:!!p.gone,host:p.peer==='host'})), matches:T.matches.map(m=>({...m})), current:T.current, started:T.started, champion:T.champion};
+}
+function tournamentRender() {
+  if (!net.tour) return;
+  const T=net.tour;
+  if (net.role==='host') {
+    $('tournamentHost').classList.remove('hidden');
+    $('tourneyRoster').innerHTML=tournamentRosterHtml(T); $('tourneyBracket').innerHTML=tournamentMatchHtml(T);
+    net.connected=T.players.length>=2;
+    const full=T.players.length===T.size && T.players.every(p=>!p.gone);
+    const start=$('hostStartBtn'); start.classList.toggle('hidden', !full || T.started);
+    start.textContent='START '+T.size+'-PLAYER TOURNAMENT';
+    setText('hostStatus', T.started?'Tournament underway. All players remain in the room.':`PLAYOFF LOBBY: ${T.players.length}/${T.size} connected. ${full?'Ready to start!':'Share your invite link.'}`);
+    netSend({t:'tour',tour:tournamentPublic()});
+  } else {
+    $('tournamentGuest').classList.remove('hidden');
+    $('guestRoster').innerHTML=tournamentRosterHtml(T); $('guestBracket').innerHTML=tournamentMatchHtml(T);
+    setText('guestTournamentHint',T.started?'Tournament in progress. You will play when your matchup begins.':'Stay connected. The host starts after every slot fills.');
+  }
+}
+function tournamentHostMsg(m, peerId) {
+  const T=net.tour;
+  if (!T || !peerId) return;
+  let seat=T.players.findIndex(p=>p.peer===peerId);
+  if (m.t==='join') {
+    if (seat<0) {
+      if (T.started || T.players.length>=T.size) {netSend({t:'tourError',msg:'Tournament is full or already started.'},peerId);return;}
+      const requested=Math.max(0,Math.min(CITY_TEAMS.length-1,m.team|0));
+      if (T.players.some(p=>p.team===requested)) {netSend({t:'tourError',msg:'That team is taken. Choose a different team and join again.'},peerId);return;}
+      T.players.push({peer:peerId,name:String(m.name||'Player').trim().slice(0,24)||'Player',team:requested});seat=T.players.length-1;
+    }
+    netSend({t:'hello',mode:'tournament',seat,size:T.size,tour:tournamentPublic()},peerId);
+    tournamentRender();return;
+  }
+  if (seat<0) return;
+  if (m.t==='team' && !T.started) {
+    const choice=m.team|0;
+    if (choice<0||choice>=CITY_TEAMS.length) return;
+    if (T.players.some((p,i)=>i!==seat&&p.team===choice)) {netSend({t:'tourError',msg:'Team already selected by another player.'},peerId);return;}
+    T.players[seat].team=choice;tournamentRender();return;
+  }
+  if (!T.started||!gameState.running || T.current==null) return;
+  const match=T.matches[T.current], side=match.a===seat?'home':match.b===seat?'away':null;
+  if (!side || !['in','k','md','mu'].includes(m.t)) return;
+  const I=inp[side];
+  if(m.t==='in') {
+    const K=I.keys;Object.keys(K).forEach(k=>delete K[k]);
+    (Array.isArray(m.keys)?m.keys:[]).slice(0,25).forEach(k=>{if(typeof k==='string'&&k.length<25)K[k]=true;});
+    I.mouse.x=clamp(Number(m.mx)||0,RINK.L,RINK.R);I.mouse.y=clamp(Number(m.my)||0,RINK.T,RINK.B);
+  } else if(m.t==='k') inputKey(side,String(m.k).slice(0,24),String(m.code||''));
+  else if(m.t==='md') {I.mouse.x=clamp(Number(m.x)||0,RINK.L,RINK.R);I.mouse.y=clamp(Number(m.y)||0,RINK.T,RINK.B);inputMouseDown(side,m.b|0);}
+  else if(m.t==='mu') inputMouseUp(side,m.b|0);
+}
+function tournamentGuestMsg(m) {
+  if(m.t==='tourError') {setText('joinStatus',m.msg||'Unable to join.');return;}
+  if(m.t==='hello') {
+    clearTimeout(net.joinTO);net.connected=true;net.mode='tournament';net.seat=m.seat;
+    $('joinBtn').disabled=true;setText('joinStatus',`Joined playoff lobby: slot ${m.seat+1}/${m.size}. Change your team in the selector until the bracket begins.`);
+    $('tournamentGuest').classList.remove('hidden');
+    if(m.tour) {net.tour=m.tour;tournamentRender();}
+  } else if(m.t==='tour') {net.tour=m.tour;tournamentRender();}
+  else if(m.t==='start') startGuestMatch(m);
+  else if(m.t==='s') applySnapshot(m);
+  else if(m.t==='over') {gameState.running=false;['faceoffBanner','oneTimerBanner'].forEach(i=>$(i).classList.add('hidden'));showOver(m);}
+  else if(m.t==='cd') setText('noCountdown',`NEXT GAME IN ${m.n}`);
+}
+function tournamentStart() {
+  const T=net.tour;
+  if(!T||net.role!=='host') return;
+  if(!T.started) {
+    if(T.players.length!==T.size||T.players.some(p=>p.gone)) {tournamentRender();return;}
+    T.started=true;
+    T.matches=T.size===4?[{round:0,a:0,b:1,winner:null},{round:0,a:2,b:3,winner:null}]:[{round:1,a:0,b:1,winner:null}];
+    T.current=0;
+  } else {
+    const next=T.matches.findIndex(m=>m.winner==null);
+    if(next<0)return;T.current=next;
+  }
+  tournamentStartMatch();
+}
+function tournamentStartMatch() {
+  const T=net.tour,m=T.matches[T.current];if(!m)return;
+  const aOut=!!T.players[m.a].gone,bOut=!!T.players[m.b].gone;
+  if(aOut||bOut){ gameState.homeScore=aOut?0:1;gameState.awayScore=bOut?0:1;gameState.running=false;tournamentGameOver(aOut?m.b:m.a);return; }
+  const hp=T.players[m.a],ap=T.players[m.b];
+  gameState.homeTeam={...CITY_TEAMS[hp.team]};gameState.awayTeam={...CITY_TEAMS[ap.team]};resolveColorClash();rebuildBackgrounds();
+  net.playSide=m.a===0?'home':m.b===0?'away':null;
+  inp.home=net.playSide==='home'?{keys,mouse}:freshAwayInput();
+  inp.away=net.playSide==='away'?{keys,mouse}:freshAwayInput();
+  for(const k in keys)keys[k]=false;mouse.leftDown=false;mouse.chargeTime=0;
+  $('onlineOverlay').classList.add('hidden');$('netOverOverlay').classList.add('hidden');
+  startMatch();
+  if(T.current>0){gameState.inIntro=false;music.stop(0.1);audioFX.playWhistle();startFaceoff();}
+  T.players.forEach((p,seat)=>{
+    if(p.peer==='host'||p.gone)return;
+    const side=m.a===seat?'home':m.b===seat?'away':null;
+    netSend({t:'start',home:gameState.homeTeam,away:gameState.awayTeam,len:gameState.periodLength,intro:T.current===0,mode:'tournament',series:null,side,round:m.round,match:T.current},p.peer);
+  });
+  tournamentRender();netUI();
+  showStatus(`PLAYOFF ${m.round===1?'FINAL':'SEMIFINAL'}: ${hp.name.toUpperCase()} VS ${ap.name.toUpperCase()}`);
+}
+function tournamentGameOver(forced=null) {
+  const T=net.tour;if(!T||T.current==null)return;
+  const m=T.matches[T.current];if(m.winner!=null)return;
+  const h=gameState.homeScore,a=gameState.awayScore;
+  const winner=forced!=null?forced:(h>a?m.a:a>h?m.b:null);
+  if(winner==null)return; // playoffs resolve ties in sudden-death overtime
+  m.winner=winner;m.score=[h,a];
+  if(T.size===4&&T.matches.length===2&&T.matches.every(x=>x.winner!=null)) T.matches.push({round:1,a:T.matches[0].winner,b:T.matches[1].winner,winner:null});
+  const champion=m.round===1?winner:null;
+  if(champion!=null)T.champion=champion;
+  if(champion===0)achEvent('champion');
+  const payload={t:'over',h,a,home:fullName(gameState.homeTeam).toUpperCase(),away:fullName(gameState.awayTeam).toUpperCase(),mode:'tournament',winner:h>a?'home':a>h?'away':null,champion:champion!=null?'home':null,gameNo:T.current+1,tour:tournamentPublic(),winnerSeat:winner,championSeat:champion};
+  gameState.running=false;
+  netSend(payload);showOver(payload);tournamentRender();
+  if(champion==null)scheduleNext();
+}
+function tournamentPeerGone(peerId) {
+  const T=net.tour; if(!T)return;
+  const seat=T.players.findIndex(p=>p.peer===peerId);if(seat<0)return;
+  if(!T.started) {T.players.splice(seat,1);T.players.forEach((p,i)=>{if(p.peer!=='host')netSend({t:'hello',mode:'tournament',seat:i,size:T.size,tour:tournamentPublic()},p.peer);});tournamentRender();return;}
+  T.players[seat].gone=true;
+  if(T.current!=null&&gameState.running){const m=T.matches[T.current];if(m.winner==null&&(m.a===seat||m.b===seat)) {tournamentGameOver(m.a===seat?m.b:m.a);return;}}
+  tournamentRender();
+}
+
 /* ---- lobby (host) ---- */
 function hostBegin(attempt = 0) {
   netTeardown();
   const code = genCode();
   Object.assign(net, { active: true, role: 'host', connected: false, code, mode: $('onlineMode').value, series: null });
   if (net.mode === 'playoff') net.series = { best: +$('seriesLen').value, hw: 0, aw: 0, game: 1 };
+  if (net.mode === 'tournament') { gameState.homeTeam={...CITY_TEAMS[+$('hostTeam').value]};tournamentNew(+$('tourneySize').value); }
   netWrapHost();
   setText('hostStatus', 'Creating room...'); $('hostStartBtn').classList.add('hidden'); $('codeBox').classList.add('hidden');
   net.tr = openTransport(code, 'host', {
@@ -5750,17 +6082,19 @@ function hostBegin(attempt = 0) {
       $('codeBox').classList.remove('hidden'); setText('codeText', code);
       setText('hostStatus', net.local ? 'Waiting... (same-browser mode: open this page in a second tab and Join with the code)' : 'Share the code or link. Waiting for your opponent...');
     },
-    onOpen() { }, onMsg: netOnMsg, onClose() { netPeerGone(); },
+    onOpen() { }, onMsg: netOnMsg, onClose(peerId) { netPeerGone(peerId); },
     onError(e) { if (e && e.type === 'unavailable-id' && attempt < 5) { hostBegin(attempt + 1); return; } netFail(e); }
   });
 }
 function lobbyUpdate() {
   if (net.role !== 'host' || !net.connected) return;
+  if (net.mode === 'tournament') { tournamentRender(); return; }
   setText('hostStatus', `${fullName(gameState.awayTeam).toUpperCase()} joined as AWAY! Press START when you're both ready.`);
   $('hostStartBtn').classList.remove('hidden');
 }
 function hostStart() {
   if (!(net.role === 'host' && net.connected)) return;
+  if (net.mode === 'tournament') { tournamentStart(); return; }
   $('onlineOverlay').classList.add('hidden'); $('netOverOverlay').classList.add('hidden');
   const first = !net.series || net.series.game === 1;
   startMatch();
@@ -5778,12 +6112,13 @@ function guestBegin(code, teamIdx) {
   setText('joinStatus', 'Connecting...');
   net.joinTO = setTimeout(() => { if (!net.connected) netFail({ type: 'timeout' }); }, 12000);
   net.tr = openTransport(code, 'guest', {
-    onReady() { }, onOpen() { netSend({ t: 'join', team: teamIdx }); }, onMsg: netOnMsg, onClose() { netPeerGone(); }, onError(e) { netFail(e); }
+    onReady() { }, onOpen() { netSend({ t: 'join', team: teamIdx, name: ($('joinName').value || 'Player').slice(0,24) }); }, onMsg: netOnMsg, onClose() { netPeerGone(); }, onError(e) { netFail(e); }
   });
 }
 
 /* ---- results / playoff series ---- */
 function onlineGameOver() {
+  if (net.mode === 'tournament') { tournamentGameOver(); return; }
   const gs = gameState, h = gs.homeScore, a = gs.awayScore, w = h > a ? 'home' : a > h ? 'away' : null;
   let champion = null, gameNo = 1;
   if (net.mode === 'playoff' && net.series) {
@@ -5805,16 +6140,20 @@ function scheduleNext() {
   }, 1000);
 }
 function showOver(p) {
-  const me = ME(), won = p.winner === me;
+  const me = ME(), won = p.mode==='tournament'?p.winnerSeat===net.seat:p.winner===me;
+  if(p.mode==='tournament') { if(p.tour) net.tour=p.tour; if(p.tour) tournamentRender(); }
   if (p.series) net.series = p.series;
   const playoff = p.mode === 'playoff' && p.series;
-  setText('noTitle', p.champion ? (p.champion === me ? 'SERIES CHAMPIONS!' : 'SERIES LOST') : playoff ? `PLAYOFFS - GAME ${p.gameNo} FINAL` : 'FINAL');
+  setText('noTitle', p.mode==='tournament'?(p.championSeat!=null?'TOURNAMENT CHAMPION!':`PLAYOFF MATCH ${p.gameNo} FINAL`):p.champion ? (p.champion === me ? 'SERIES CHAMPIONS!' : 'SERIES LOST') : playoff ? `PLAYOFFS - GAME ${p.gameNo} FINAL` : 'FINAL');
   setText('noScore', `${p.home} ${p.h} - ${p.a} ${p.away}`);
-  const res = $('noResult'); res.textContent = !p.winner ? 'DRAW' : won ? 'YOU WIN!' : 'YOU LOSE'; res.style.color = !p.winner ? '#facc15' : won ? '#4ade80' : '#f87171';
-  setText('noSeries', playoff ? `SERIES ${p.home} ${p.series.hw} - ${p.series.aw} ${p.away}  (BEST OF ${p.series.best})` : '');
-  $('noTrophy').classList.toggle('hidden', !(p.champion && p.champion === me));
-  setText('noCountdown', playoff && !p.champion ? 'NEXT GAME IN 8' : '');
-  $('noRematchBtn').classList.toggle('hidden', !(net.role === 'host' && !playoff));
+  const res = $('noResult');
+  const playing = p.mode!=='tournament' || (p.tour&&p.tour.matches[p.gameNo-1]&&[p.tour.matches[p.gameNo-1].a,p.tour.matches[p.gameNo-1].b].includes(net.seat));
+  res.textContent = p.mode==='tournament'&&!playing?'SPECTATING':p.mode!=='tournament'&&!p.winner?'DRAW':won?'YOU WIN!':'YOU LOSE';
+  res.style.color = p.mode==='tournament'&&!playing?'#7dd3fc':won?'#4ade80':'#f87171';
+  setText('noSeries',p.mode==='tournament'?`TOURNAMENT: ${p.tour?.players[p.winnerSeat]?.name||'Player'} WINS${p.championSeat!=null?' THE CHAMPIONSHIP':''} · ${p.tour?.size||4} ENTRANTS`:playoff ? `SERIES ${p.home} ${p.series.hw} - ${p.series.aw} ${p.away}  (BEST OF ${p.series.best})` : '');
+  $('noTrophy').classList.toggle('hidden',p.mode==='tournament'?p.championSeat!==net.seat:!(p.champion&&p.champion===me));
+  setText('noCountdown',(p.mode==='tournament'&&p.championSeat==null)||(playoff&&!p.champion)?'NEXT GAME IN 8':'');
+  $('noRematchBtn').classList.toggle('hidden', !(net.role === 'host' && !playoff && p.mode!=='tournament'));
   setText('noWait', !playoff && net.role === 'guest' ? 'Waiting for the host to start a rematch...' : '');
   $('netOverOverlay').classList.remove('hidden'); netUI();
 }
@@ -6197,6 +6536,7 @@ function onlineTab(t) {
 }
 function openOnline(tab = 'host', code = '') {
   $('onlineOverlay').classList.remove('hidden'); onlineTab(tab);
+  if(net.role!== 'host') $('hostTeam').value=tournamentTeamIndex(gameState.homeTeam);
   setText('hostYou', `You play as ${fullName(gameState.homeTeam).toUpperCase()} (HOME, attacking right).`);
   if (code) $('joinCode').value = code;
 }
@@ -6209,12 +6549,16 @@ function copyText(txt, btn) {
   try { navigator.clipboard.writeText(txt).then(done, () => window.prompt('Copy this:', txt)); } catch (e) { window.prompt('Copy this:', txt); }
 }
 function wireOnline() {
-  CITY_TEAMS.forEach((t, i) => { const o = document.createElement('option'); o.value = i; o.textContent = `${t.city} (${t.name})`; $('joinTeam').appendChild(o); });
+  CITY_TEAMS.forEach((t, i) => { ['joinTeam','hostTeam'].forEach(id => {const o = document.createElement('option'); o.value = i; o.textContent = `${t.city} (${t.name})`; $(id).appendChild(o);}); });
+  $('hostTeam').value=tournamentTeamIndex(gameState.homeTeam);
+  $('hostTeam').addEventListener('change',()=>{ if(net.role==='host'&&net.mode==='tournament'&&net.tour&&!net.tour.started){const chosen=+$('hostTeam').value;if(net.tour.players.some((p,i)=>i>0&&p.team===chosen)){setText('hostStatus','That team belongs to another player. Choose a different one.');$('hostTeam').value=net.tour.players[0].team;return;}net.tour.players[0].team=chosen;gameState.homeTeam={...CITY_TEAMS[chosen]};tournamentRender();}});
   $('joinTeam').value = Math.floor(Math.random() * CITY_TEAMS.length);
+  $('joinTeam').addEventListener('change', () => { if(net.role==='guest' && net.mode==='tournament' && net.connected && net.tour && !net.tour.started) netSend({t:'team',team:+$('joinTeam').value}); });
   $('playOnlineBtn').addEventListener('click', () => openOnline('host'));
   $('tabHost').addEventListener('click', () => onlineTab('host')); $('tabJoin').addEventListener('click', () => onlineTab('join'));
   $('onlineCloseBtn').addEventListener('click', closeOnline);
-  $('onlineMode').addEventListener('change', () => $('seriesWrap').classList.toggle('hidden', $('onlineMode').value !== 'playoff'));
+  $('hostPlayerName').addEventListener('change',()=>{if(net.role==='host'&&net.tour&&!net.tour.started){net.tour.players[0].name=($('hostPlayerName').value||'Host').slice(0,24);tournamentRender();}});
+  $('onlineMode').addEventListener('change', () => { $('seriesWrap').classList.toggle('hidden', $('onlineMode').value !== 'playoff'); $('tourneyWrap').classList.toggle('hidden', $('onlineMode').value !== 'tournament'); });
   $('genCodeBtn').addEventListener('click', () => { audioFX.init(); hostBegin(); });
   $('hostStartBtn').addEventListener('click', () => { audioFX.init(); hostStart(); });
   $('copyCodeBtn').addEventListener('click', e => copyText(net.code, e.currentTarget));

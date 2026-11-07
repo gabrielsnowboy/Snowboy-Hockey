@@ -69,3 +69,36 @@ The gameplay animation enhancements in the prior upgrade are retained. Browser g
 - Previous main-menu redesign, skating/fight animation upgrade, game modes and controls are preserved.
 
 Validation: JavaScript syntax checked with Node.js. Full interactive gameplay was not validated in a browser in the build environment.
+
+## Goalie distribution and pause broadcast update (November 2026)
+- Fixed goalie outlets: release after a save now gives the puck appropriate velocity, a safer starting position, and temporary re-glove protection.
+- Prevented the goalie crease AI from applying the same movement twice in a single frame.
+- Rebuilt the pause interface with the current score, teams, period and time, accessible controls, and a responsive grid of actions.
+- Expanded the animated arena jumbotron with layered crowd spectators and a new section-wide fan cam.
+- Retained the professional menu logo, hockey card designs, improved ice, and other gameplay updates.
+
+## Multiplayer playoff tournament (November 2026)
+
+**How to create a playoff with friends**
+1. Choose **PLAY ONLINE → HOST A GAME**.
+2. Set mode to **Playoff Tournament**, choose **2 players** or **4 players**, enter your player name, and choose your team.
+3. Click **GENERATE INVITE CODE** and share the code or invite link with the other entrants.
+4. Each guest opens **JOIN WITH CODE**, enters a player name, selects an available team, and joins the same lobby. Names and team selections appear in the shared lobby. Every participant must use a different team.
+5. When the lobby is full, the host clicks **START TOURNAMENT**. In the 4-player tournament the first two games are semifinals and the winners meet in the final. Each knockout match is one game with sudden-death overtime if tied. The champion appears after the final.
+6. Everyone stays connected throughout. The host's machine runs each match, including when two guests face each other; non-playing entrants spectate the live broadcast. Later games start automatically after an 8-second results screen.
+
+**Important limitations**
+- The original 1v1 **Quick Match** and **Playoff Series** modes remain available. Playoff Tournament is a separate mode, limited to 2 or 4 total participants including the host.
+- This is **live peer-to-peer multiplayer**, not a persistent hosted league. The host must stay online with the tab open throughout the tournament. Closing the host tab ends the session. New players cannot join after the tournament starts. Disconnected players may forfeit.
+- Uses the existing PeerJS public signaling service and WebRTC. Connectivity depends on network conditions; strict NAT/firewall configurations may prevent connections. No dedicated relay/TURN server is included.
+- Same-browser testing is available by appending `?local=1` to the page URL, then opening several tabs and joining via the code. A local broadcast connection is not a substitute for real multi-device testing.
+- Existing online play stays unpaused; camera/audio and gameplay are generated on the host, with spectators receiving game snapshots.
+
+**Validation:** JavaScript syntax passes Node.js, and a simulated four-player tournament logic test confirmed lobby joins, team uniqueness, guest controls, semifinals, final, and champion advancement. Full browser/WebRTC testing could not be completed in the build environment because browser navigation was blocked by administrator policy. Test a live 2-player and 4-player tournament on separate devices before using it for an event.
+
+## Crowd visibility & arcade fight props (November 2026)
+
+- **Front-row crowd corrected:** Near-side spectators now render after the rink in a carefully clipped foreground layer. Their faces stay visible below the glass instead of being hidden behind board panels; the back spectator row draws before the front row.
+- **Randomized fight variety:** Brawls can feature a soft foam folding chair, oversized inflatable bat, ribbon streamer, pool noodle, or squeaky toy mallet. These are short slapstick animations, with comic sound captions. They are visual-only and do not change health, damage, collision or scoring.
+- **Multiplayer sync:** Active fight props and their animation timing are carried in the host's match snapshots for visiting players and spectators.
+- **Previous features kept:** Main menu, professional logo, cards, goalie outlet passing, pause jumbotron, and playoff tournament lobby.
